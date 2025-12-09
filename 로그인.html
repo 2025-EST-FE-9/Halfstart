@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /*
+        변경을 클릭하면 나라 목록만 나타나게 하기!드롭다운 리스트 참고하기
+        */
+
+        .country{
+               cursor: pointer;
+               opacity: 0;
+               position: absolute;
+               display: none;
+        }
+        
+    </style>
+</head>
+<body class="flex justify-center">
+    <div class="relative">
+        <!--아이콘-->
+        <div>
+            <img src="" alt="">
+            <img src="" alt="">
+        </div>
+        <!-- 제목 --> 
+        <div class="font-medium text-2xl my-5">가입 또는 로그인을 위해 이메일을 입력<br>
+            하세요.</div>
+        <!-- 대한민국 -->
+        <div class="text-sm font-medium">대한민국 
+            
+            <label class="list cursor-pointer underline text-gray-500 text-sm/5" for="list">변경</label>
+        <input type="text" id="list" name="country" list="name">
+
+          <datalist id="name" class="country">
+            <option value="GU">괌</option>
+            <option value="KA" selected>대한민국</option>
+            <option value="US">미국</option>
+            <option value="JP">일본</option>
+            <option value="CN">중국</option>
+          </datalist>
+        </div>
+        <!--이메일-->
+        <div>
+            <input class= "border-gray-500 rounded-lg my-5 border-1 w-sm p-3" 
+            type="text" placeholder="이메일">
+        </div>
+
+        <!-- 설명 -->
+        <div class="text-gray-500 my-7 text-sm">
+            계속 진행하면 나이키의 
+            <strong class=" font-semibold underline cursor-pointer">개인정보 처리방침</strong>및 
+            <span class="font-bold underline cursor-pointer">이용약관</span> <br>
+            에 동의하게 됩니다. 
+        </div>
+        <!-- 버튼 -->
+        <div class="absolute right-0">
+            <button class="bg-black text-white hover:bg-gray-500 rounded-full p-3 w-20 ">
+                계속
+            </button>
+        </div>
+    </div>
+</body>
+</html>
