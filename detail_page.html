@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="output.css" rel="stylesheet">
+    <!-- npx @tailwindcss/cli -i ./styles.css -o ./output.css --watch -->
+
+    <style>
+        body {
+            font-family:
+                "Nike TG",
+                "Noto Sans KR",
+                "Apple SD Gothic Neo",
+                "Malgun Gothic",
+                Arial,
+                sans-serif;
+        }
+
+        header {
+            font-weight: bold;
+            /* 또는 800 */
+            letter-spacing: -0.5px;
+        }
+
+        .mini-rogo img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .rogo img {
+            width: 70px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        .user-menu,
+        #input,
+        .align-middle {
+            background: #f5f5f5;
+        }
+
+        /* 검색창 영역 */
+        .search-bar {
+            position: relative;
+            width: 170px;
+            /* 원하는 크기로 조절 */
+        }
+
+        .search-icon {
+            width: 35px;
+            height: 35px;
+            padding: 5px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            background-color: #f5f5f5;
+        }
+
+        #input {
+            width: 100%;
+            color: gray;
+            padding: 15px;
+            padding-left: 40px;
+            /* 아이콘 위치에 맞게 조절 */
+            border-radius: 50px;
+            background-color: #f5f5f5;
+            outline: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-size: medium;
+        }
+
+        #input::placeholder {
+            color: #7a7a7a;
+            opacity: 1;
+        }
+
+        #input:hover {
+            background-color: #d6d6d6;
+        }
+
+        /* header 메뉴바 영역 */
+        /* 장바구니, 즐겨찾기 아이콘 */
+        .cart {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .cart:hover {
+            background-color: #f5f5f5;
+            border-radius: 50%;
+        }
+
+        .menu {
+            position: relative;
+            /* 기준이 되는 박스*/
+            padding: 0px 45px;
+        }
+
+        .sub_title {
+            padding: 30px 10px;
+            display: inline-block;
+            /* position: relative; */
+        }
+
+        .sub_title>a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 0;
+        }
+
+        .sub_title>a::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: black;
+            transform-origin: bottom;
+            transition: transform 0.25s ease-out;
+        }
+
+        .sub_title>a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom;
+        }
+
+        .dropdown_title {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            /* display: none;  메뉴바 숨김 */
+            z-index: 100;
+            background: white;
+            padding: 0 10px;
+            /* header px-13과 맞춤*/
+
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+
+            /* transform: translateY(-10px); 위에서 내려오는 느낌 */
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* 메뉴바 내용 박스 */
+        .dropdown_inner {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 100px;
+            padding: 10px 50px;
+            justify-content: center;
+
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        /* hover 됐을 때 메뉴만 위→아래로 등장 */
+        .sub_title:hover .dropdown_inner {
+            transition-delay: 0.1s;
+            /* 배경이 먼저 깔리고 살짝 뒤에 내용 등장 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sub_title:hover .dropdown_title,
+        .dropdown_title:hover {
+            /* display: block; */
+            max-height: 500px;
+            /* 메뉴보다 넉넉하게 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 메뉴바 타이틀 이름 */
+        .dropdown_sub_title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding-bottom: 10px;
+        }
+
+        /* 메뉴바 리스트 내용 */
+        .dropdown_sub_item {
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #7a7a7a;
+            padding-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .dropdown_sub_item:hover {
+            color: black;
+        }
+
+        .dropdown_sub_title:hover {
+            color: #7a7a7a;
+        }
+
+        .vertical-line {
+            border-right: 1px solid;
+            height: 14px;
+
+        }
+
+        /* 상단 헤더 메뉴 리스트*/
+        .mini-item:hover {
+            color: #7a7a7a;
+        }
+
+
+        .mini-customer {
+            position: absolute;
+            top: 200%;
+            left: -50%;
+            background-color: white;
+            width: 250px;
+            /* display: none;  메뉴바 숨김 */
+            z-index: 100;
+            background: white;
+            /* padding: 5px; */
+            border-radius: 10px;
+
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+
+            transform: translateY(-10px);
+            /* 위에서 내려오는 느낌 */
+            transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        #customer>a:hover+.mini-customer,
+        .mini-customer:hover {
+            /* display: block; */
+            max-height: 300px;
+            /* 메뉴보다 넉넉하게 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* header끝 main */
+
+        .selectable-image {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item-info-red-rebel {
+            font-family: sans-serif;
+        }
+
+        .item-info-item-name {
+            font-family: sans-serif;
+        }
+
+        .item-info-item-sub {
+            font-family: sans-serif;
+        }
+
+        .mini-rogo img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .rogo img {
+            width: 100px;
+            height: 35px;
+        }
+
+        .user-menu,
+        #input,
+        .align-middle,
+        .uni-promotion {
+            background: #f5f5f5;
+        }
+
+        .selectable-image {
+            max-width: 100%;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* selectable-imgae가 선택시, 테두리 주기. */
+        .selectable-image:hover {
+            border: 1px solid black;
+        }
+
+        .small-img-info {
+            width: 3.8rem;
+            height: 3.8rem;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+        }
+
+        .small-img-info:hover {
+            filter: brightness(0.8);
+        }
+
+        .img-flex-third {
+            border: 0.5px solid rgba(128, 128, 128, 0.3);
+            padding: 12px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .img-flex-third:hover {
+            border: 0.5px solid black;
+        }
+
+        /* main 첫번째 flex 가운데 큰 이미지 크기조절 */
+        .main-img-big {
+            width: 36vw;
+        }
+
+        .main-info {
+            width: 25vw;
+        }
+
+        .main-info-li {
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+
+        /* main 첫번째 flex 상품정보칸 p태그 마진 */
+        .item-info>p {
+            margin-bottom: 0.5rem;
+        }
+
+
+        details summary {
+            list-style: none;
+            /* 기본 삼각형 없애기 */
+        }
+
+        /* 삼각형 아이콘 가리키는 가상요소 */
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details summary::after {
+            content: "▼";
+            transition: transform 0.5s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+
+        }
+
+        details[open]>summary~* {
+            animation: reveal 1.5s;
+        }
+
+        /* card-performance 카드 */
+        .card-performance-item-name {
+            margin-top: 1.5rem;
+        }
+
+        .card-performance-item-info {
+            margin-top: 0.8rem;
+            margin-bottom: 1.2rem;
+            width: 90%;
+        }
+
+        /* 
+    my-5 text-xl font-semibold
+    */
+        .card-performance>p {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .favorite-items-img {
+            margin-bottom: 1.25rem;
+        }
+
+        .favorite-items {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .favorite-items-price {
+            margin-top: 8px;
+        }
+
+        .soldout-price {
+            margin-top: 8px;
+            color: gray;
+            text-decoration: line-through;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -10px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+
+        .footer-first-ul-title {
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            font-size: 13px;
+            color: black;
+        }
+
+        .footer-first-ul {
+            margin-bottom: 1rem;
+            font-size: 13px;
+        }
+
+        #targetSection1,
+        #targetSection2 {
+            scroll-behavior: smooth;
+            /* 부드러운 스크롤 적용 */
+        }
+
+        .overflow-buttons {
+            border-radius: 50%;
+            font-size: 1.5rem;
+            width: 3rem;
+            height: 3rem;
+            cursor: pointer;
+        }
+
+        .overflow-buttons:active {
+            border: 2px solid oklch(62.3% 0.214 259.815);
+        }
+
+        .overflow-buttons:focus {
+            border: 2px solid oklch(62.3% 0.214 259.815);
+        }
+
+        /* main-img-sub
+    grid-flow-col auto-cols-[25rem]
+    */
+        @media (min-width : 1024px) {
+            .main-img-sticky {
+                position: sticky;
+                top: 0;
+
+            }
+
+            .main-img-small {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width : 1023px) {
+            .main-img-small {
+                display: none;
+            }
+
+            .main-img-big {
+                margin: 0;
+                padding: 0;
+                width: 100vw;
+                height: auto;
+                display: block;
+            }
+
+            .main-img-sub {
+                grid-auto-flow: column;
+                grid-auto-columns: 3rem;
+                overflow-x: auto;
+                gap: 3px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <!-- 헤더 상단 user menu [mini 로고, 메뉴바 양 사이드 밀어내기] -->
+        <nav class="user-menu flex h-9 justify-between items-center px-13">
+            <div class="mini-rogo flex gap-7">
+                <img src="img/jordan.png" alt="조던로고">
+                <img src="img/converse.png" alt="컨버스로고">
+            </div>
+
+            <div class="flex ">
+                <ul class="mini-menu relative flex gap-3 text-xs justify-center items-center">
+                    <li class="mini-item"><a href="#">매장 찾기</a></li>
+                    <li class="vertical-line"></li>
+                    <li class="mini-item " id="customer">
+                        <a href="#">고객센터</a>
+                        <div class="mini-customer">
+                            <ul class="p-5">
+                                <li class="text-base text-black pb-3">고객센터</li>
+                                <li class="pb-2">주문</li>
+                                <li class="pb-2">로그인 안내</li>
+                                <li class="pb-2">결제 방법</li>
+                                <li class="pb-2">배송</li>
+                                <li class="pb-2">반품</li>
+                                <li class="pb-2">사이즈 가이드</li>
+                                <li class="pb-2">문의하기</li>
+                                <li class="pb-2">개인정보처리방침</li>
+                                <li class="pb-2">이용약관</li>
+                                <li class="pb-2">이벤트</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="vertical-line"></li>
+                    <li class="mini-item"><a href="#">가입하기</a></li>
+                    <li class="vertical-line"></li>
+                    <li class="mini-item"><a href="#">로그인</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 헤더 하단 로고, 메뉴, 검색창, 아이콘 (일단 비트윈으로 밀어놓음)-->
+        <nav class="menu bg-white flex justify-between items-center h-15">
+            <div class="rogo flex-1">
+                <img src="img/rogo.png" alt="">
+            </div>
+
+            <div class="flex text-md gnb mx-auto"> <!--가운데 고정-->
+                <ul class="flex gap-4 justify-center">
+                    <li class="sub_title">
+                        <a href="">New</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title"><a href="">New</a></li>
+                                    <li class="dropdown_sub_item"><a href="">New to Sale✨</a></li>
+                                    <li class="dropdown_sub_item"><a href="">신제품 전체</a></li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">나이키 X 기묘한 이야기</li>
+                                    <li class="dropdown_sub_item">하코네 에키덴 컬렉션</li>
+                                    <li class="dropdown_sub_item">나이키 푸퍼 스타일링</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔</li>
+                                    <li class="dropdown_sub_item">따뜻한 겨울 플리스⛄</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Shop Icons</li>
+                                    <li class="dropdown_sub_item">에어 포스 1</li>
+                                    <li class="dropdown_sub_item">에어맥스</li>
+                                    <li class="dropdown_sub_item">아스트로그래버</li>
+                                    <li class="dropdown_sub_item">샥스</li>
+                                    <li class="dropdown_sub_item">줌 보메로</li>
+                                    <li class="dropdown_sub_item">코르테즈</li>
+                                    <li class="dropdown_sub_item">덩크</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Shop by Sport</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">트레이닝 & 짐</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">요가</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">가이드</li>
+                                    <li class="dropdown_sub_item">러닝화 가이드</li>
+                                    <li class="dropdown_sub_item">키즈 러닝화 가이드</li>
+                                    <li class="dropdown_sub_item">축구화 가이드</li>
+                                    <li class="dropdown_sub_item">조던 농구화 가이드</li>
+                                    <li class="dropdown_sub_item">여성 브라 가이드</li>
+                                    <li class="dropdown_sub_item ">키즈 브라 가이드</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">SNKRS</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Men</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">할리우드 골키퍼 컬렉션</li>
+                                    <li class="dropdown_sub_item">호나우지뉴 티엠포 레전드</li>
+                                    <li class="dropdown_sub_item">윈터 슈즈 컬렉션🥾</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔️</li>
+                                    <li class="dropdown_sub_item">겨울 시즌 용품🧣</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">신발</li>
+                                    <li class="dropdown_sub_item">라이프스타일</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">트레이닝 & 짐</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                    <li class="dropdown_sub_item">10만원 이하 신발</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">의류</li>
+                                    <li class="dropdown_sub_item">아우터웨어</li>
+                                    <li class="dropdown_sub_item">재킷 & 베스트</li>
+                                    <li class="dropdown_sub_item">후디 & 크루</li>
+                                    <li class="dropdown_sub_item">팀 & 티셔츠</li>
+                                    <li class="dropdown_sub_item">팬츠 & 타이츠</li>
+                                    <li class="dropdown_sub_item">남성 셋업</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                    <li class="dropdown_sub_item">24.7</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">용품</li>
+                                    <li class="dropdown_sub_item">모자 & 헤드밴드</li>
+                                    <li class="dropdown_sub_item">가방</li>
+                                    <li class="dropdown_sub_item">양말</li>
+                                    <li class="dropdown_sub_item">장갑</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Women</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">위넡 슈즈 컬렉션🥾</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔️</li>
+                                    <li class="dropdown_sub_item">올데이 플리스 셋업</li>
+                                    <li class="dropdown_sub_item">겨울 시즌 용품🧣</li>
+                                    <li class="dropdown_sub_item">멈추지 않는 러닝</li>
+                                    <li class="dropdown_sub_item">윈터 액티브 팬츠</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">신발</li>
+                                    <li class="dropdown_sub_item">라이프스타일</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">트레이닝 & 짐</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                    <li class="dropdown_sub_item">테니스</li>
+                                    <li class="dropdown_sub_item">10만원 이하 신발</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">의류</li>
+                                    <li class="dropdown_sub_item">아우터웨어</li>
+                                    <li class="dropdown_sub_item">재킷 & 베스트</li>
+                                    <li class="dropdown_sub_item">후디 & 크루</li>
+                                    <li class="dropdown_sub_item">탑 & 티셔츠</li>
+                                    <li class="dropdown_sub_item">팬츠</li>
+                                    <li class="dropdown_sub_item">스커트 & 드레스</li>
+                                    <li class="dropdown_sub_item">여성 셋업</li>
+                                    <li class="dropdown_sub_item">스포츠 브라</li>
+                                    <li class="dropdown_sub_item">타이츠 & 레깅스</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">용품</li>
+                                    <li class="dropdown_sub_item">모자 & 헤드밴드</li>
+                                    <li class="dropdown_sub_item">가방</li>
+                                    <li class="dropdown_sub_item">양말</li>
+                                    <li class="dropdown_sub_item">장갑</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Kids</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">키즈 푸퍼 컬렉션❄️</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔️</li>
+                                    <li class="dropdown_sub_item">올데이 플리스 셋업</li>
+                                    <li class="dropdown_sub_item">키즈 코지 무드🥾</li>
+                                    <li class="dropdown_sub_item">Nike X LEGO® 컬렉션</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">신발</li>
+                                    <li class="dropdown_sub_item">베이비 (160mm 이하)</li>
+                                    <li class="dropdown_sub_item">리틀키즈 (165-220mm)</li>
+                                    <li class="dropdown_sub_item">주니어 (200-250mm)</li>
+                                    <li class="dropdown_sub_item">부츠</li>
+                                    <li class="dropdown_sub_item">덩크 & 에어 포스 1</li>
+                                    <li class="dropdown_sub_item">키즈 이지온 신발</li>
+                                    <li class="dropdown_sub_item">라이프스타일</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">의류</li>
+                                    <li class="dropdown_sub_item">베이비 (0-3세)</li>
+                                    <li class="dropdown_sub_item">리틀키즈 (3-7세)</li>
+                                    <li class="dropdown_sub_item">주니어 (7-15세)</li>
+                                    <li class="dropdown_sub_item">아우터웨어</li>
+                                    <li class="dropdown_sub_item">재킷 & 베스트</li>
+                                    <li class="dropdown_sub_item">후디 & 크루</li>
+                                    <li class="dropdown_sub_item">탑 & 티셔츠</li>
+                                    <li class="dropdown_sub_item">스커트 & 드레스</li>
+                                    <li class="dropdown_sub_item">상하의 세트</li>
+                                    <li class="dropdown_sub_item">팬트 & 레깅스</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">용품</li>
+                                    <li class="dropdown_sub_item">모자</li>
+                                    <li class="dropdown_sub_item">가방</li>
+                                    <li class="dropdown_sub_item">양말</li>
+                                    <li class="dropdown_sub_item">장갑</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Jordan</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">조던 겨울 컬렉션❄️</li>
+                                    <li class="dropdown_sub_item">조던 아우터웨어</li>
+                                    <li class="dropdown_sub_item">조던 플리스</li>
+                                    <li class="dropdown_sub_item">조던 스트릿 컬렉션</li>
+                                    <li class="dropdown_sub_item">조던 셋업</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Men</li>
+                                    <li class="dropdown_sub_item">전체 보기</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Women</li>
+                                    <li class="dropdown_sub_item">전체 보기</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Kids</li>
+                                    <li class="dropdown_sub_item">전체 보기</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                    <li class="dropdown_sub_item ">베이비 (0-3세)</li>
+                                    <li class="dropdown_sub_item">리틀키즈 (3-7세)</li>
+                                    <li class="dropdown_sub_item">주니어 (7-15세)</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Sale</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">Sale</li>
+                                    <li class="dropdown_sub_item">All Sales</li>
+                                    <li class="dropdown_sub_item">Sale 아우터웨어</li>
+                                    <li class="dropdown_sub_item">Sale 신발</li>
+                                    <li class="dropdown_sub_item">Sale 의류</li>
+                                    <li class="dropdown_sub_item">Sale 용품</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Men</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Women</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Kids</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="util flex-1 flex justify-end items-center gap-4">
+                <div class="search-bar">
+                    <img class="search-icon" src="img/search.png" alt="검색">
+                    <input type="text" placeholder="검색" id="input" class="h-9 rounded-4xl" />
+                </div>
+                <div class="flex ">
+                    <img class="cart" src="img/hope.png" alt="즐겨찾기">
+                    <img class="cart" src="img/장바구니.png" alt="장바구니">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 1. 대학생 할인 프로그램 안내창 -->
+        <div class="uni-promotion flex justify-center items-center h-15 gap-5">
+            <p class="text-sm font-">대학생 할인 프로그램 안내</p>
+            <button class="text-xs font-bold underline"><a href="#">자세히 보기</a></button>
+        </div>
+        <div class="mx-12">
+            <!-- 첫번째 상단 메인이미지(소형 대형) 호버시 변경 -->
+            <div class="flex justify-center items-start max-md:flex-col gap-4 max-w-[64rem] ml-[24%] mr-auto my-12">
+                <div class="main-img-sticky main-img-small">
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img1.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img1.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img2.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img2.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img3.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img3.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img4.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img4.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img5.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img5.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img6.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img6.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img7.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img7.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img8.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img8.png')">
+                    </div>
+                    <div class="small-img-info">
+                        <img class="thumbnail max-w-full h-full w-full rounded-md object-cover object-top "
+                            src="img/nike_img9.png" alt="gallery-img-1" onmouseover="changeImage('img/nike_img9.png')">
+                    </div>
+
+
+                </div>
+
+                <!-- 자바 스크림트를 사용하기위하여 id값 부여.(shop-main-img) -->
+                <div class="main-img-sticky relative">
+                    <img class="thumbnail main-img-big max-w-full h-full w-lg rounded-md object-cover object-top"
+                        id="shop-main-img" src="img/nike_img1.png" alt="gallery-img-1" />
+                    <div class="flex justify-center items-center">
+                        <button class="absolute bg-white left-0 top-0 m-7 px-4 py-1.5 rounded-full text-sm"><span
+                                class="text-xl">★</span> 평점 높음</button>
+                    </div>
+                    <div class="absolute right-0 bottom-0 m-7">
+                        <button class="bg-white w-11 h-11 rounded-full text-2xl cursor-pointer"><</button>
+                                <button class="bg-white w-11 h-11 rounded-full text-2xl cursor-pointer">></button>
+                    </div>
+                </div>
+                <!-- 첫번째 상단 메인이미지(소형 대형) 호버시 변경 끝-->
+
+                <div class="main-info ml-3 ">
+                    <div class="mb-5 item-info">
+                        <p class="text-red-700 item-info-red-rebel">재생 소재</p>
+                        <p class="text-xl item-info-item-name ">나이키 보메로 18</p>
+                        <p class="text-gray-500 item-info-item-sub font-semibold">남성 로드 러닝화</p>
+                        <p>179,000 원</p>
+                    </div>
+
+                    <!--
+                main-img-sub
+                -기본값 : 
+                -lg값 : grid grid-cols-5
+                -->
+                    <div class="main-img-sub mt-8 grid grid-cols-5 gap-1.5">
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top hover:border"
+                                src="img/nike_img1.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image mal-poong-sun-show rounded-md object-cover object-top"
+                                src="img/nike-second-img1.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img2.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img3.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img4.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img5.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img6.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img7.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img8.png" alt="gallery-img-1" />
+                        </div>
+                        <div class="w-17 h-17 cursor-pointer mb-2">
+                            <img class="thumbnail selectable-image rounded-md object-cover object-top "
+                                src="img/nike-second-img9.png" alt="gallery-img-1" />
+                        </div>
+                    </div>
+
+                    <div class="overflow-y-auto">
+                        <div class="mt-13 mb-3 flex justify-between items-center ">
+                            <div>
+                                <p class="font-bold">사이즈 선택</p>
+                            </div>
+
+                            <div class="flex justify-center items-center">
+                                <img src="img/사이즈가이드.png" alt="" class="w-10 h-8">
+                                <p class="text-xs font-bold">사이즈 가이드</p>
+                            </div>
+
+                        </div>
+
+                        <div class="grid grid-cols-5 gap-2 mb-4">
+                            <button class="img-flex-third hover:border-black">240</button>
+                            <button class="img-flex-third hover:border-black">245</button>
+                            <button class="img-flex-third hover:border-black">250</button>
+                            <button class="img-flex-third hover:border-black">255</button>
+                            <button class="img-flex-third hover:border-black">260</button>
+                            <button class="img-flex-third hover:border-black">265</button>
+                            <button class="img-flex-third hover:border-black">270</button>
+                            <button class="img-flex-third hover:border-black">275</button>
+                            <button class="img-flex-third hover:border-black">280</button>
+                            <button class="img-flex-third hover:border-black">285</button>
+                            <button class="img-flex-third hover:border-black">290</button>
+                            <button class="img-flex-third hover:border-black">295</button>
+                            <button
+                                class="img-flex-third hover:border-black line-through text-gray-400 bg-gray-50">300</button>
+                            <button
+                                class="img-flex-third hover:border-black line-through text-gray-400 bg-gray-50">310</button>
+                            <button
+                                class="img-flex-third hover:border-black line-through text-gray-400 bg-gray-50">315</button>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <button
+                            class="btn mt-2 bg-black text-white w-full py-5 rounded-4xl hover:bg-gray-400 cursor-pointer">장바구니</button>
+                        <button
+                            class="btn border border-gray-300 w-full mt-3 mb-7 py-5 rounded-4xl hover:border-black cursor-pointer">위시리스트
+                            ♡</button>
+                    </div>
+                    <div class="mt-8 ">
+                        <p>무료 픽업</p>
+                        <p class="underline underline-offset-4 mb-6">매장 찾기</p>
+                        <p class="text-gray-500 ">주문결제시 매장픽업 선택가능</p>
+                    </div>
+
+                    <div class="bg-gray-100 text-center my-7">
+                        <p class="mx-5 my-16 py-7 leading-relaxed">이 제품은 무게 기준 20% 이상 재생 소재를 사용해 제작되었습니다.</p>
+                    </div>
+
+                    <div class="mx-6">
+                        <ul class="list-disc list-outside text-md leading-loose">
+                            <li>현재 컬러: 블랙/다크 스모크 그레이/라이트 스모크 그레이/블랙</li>
+                            <li>스타일 번호: HM6803-005</li>
+                            <li>제조 국가/지역: 베트남</li>
+                        </ul>
+                    </div>
+                    <div class="mt-8 mb-6">
+                        <p class="font-bold underline underline-offset-6">상품 상세 정보 보기</p>
+                    </div>
+
+                    <details class=" border-gray-300 py-3">
+                        <summary class="main-info-li flex justify-between items-center">
+                            무료 배송 및 반품
+                        </summary>
+
+                        <div class="text-sm space-y-4 w-[90%]">
+                            <!-- 일반 배송 -->
+                            <div class="text-base  mt-10 mb-7">
+                                <p>일반 배송</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>배송지역 : 전국 (일부 지역 제외)</li>
+                                    <li>배송비 : 무료배송</li>
+                                    <li>제품 수령일로부터 14일 이내 제품에 대해서만 무료 반품 서비스가 가능합니다.</li>
+                                    <li>나이키는 교환 서비스를 제공하지 않습니다.</li>
+                                </ul>
+                                <div class="mt-1">
+                                    일반 배송 <a href="#"
+                                        class="underline underline-offset-2 font-semibold text-gray-900">자세히 알아보기</a>
+                                </div>
+                                <div>
+                                    반품 <a href="#" class="underline underline-offset-2 font-semibold text-gray-900">자세히
+                                        알아보기</a>
+                                </div>
+                            </div>
+
+                            <!-- 오늘도착 서비스 -->
+                            <div class="text-base mb-7">
+                                <p>오늘도착 서비스</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>이용시간 : 오전 10시 30분까지 결제 시, 당일 도착 (일요일, 공휴일 제외)</li>
+                                    <li>서비스지역 : 서울∙과천∙의왕∙군포∙수원∙성남∙안양시 전체, 용인시 수지구∙기흥구, 부천시 중동∙상동∙심곡동</li>
+                                    <li>서비스이용 : 5,000원</li>
+                                </ul>
+                                <div class="mt-1">
+                                    <a href="#" class="underline underline-offset-2 font-semibold text-gray-900">자세히
+                                        알아보기</a>
+                                </div>
+                            </div>
+
+                            <!--a/s 안내 -->
+                            <div class="text-base mb-7">
+                                <p>A/S 안내</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li>나이키 온라인에서 구매하신 제품에 대한 A/S 는 나이키코리아 고객센터<span
+                                            class="underline underline-offset-2 font-semibold text-gray-900">(080-022-0182)</span>에서
+                                        유선으로만 접수 가능합니다.</li>
+                                </ul>
+                                <div class="mt-1">
+                                    <a href="#" class="underline underline-offset-2 font-semibold text-gray-900">자세히
+                                        알아보기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+
+                    <div class="p-3 border-t border-gray-300 pb-5"></div>
+                    <!-- 제작과정 -->
+                    <details class="border-gray-300  pb-3">
+                        <summary class="main-info-li flex justify-between items-center">
+                            제작 과정
+                        </summary>
+
+                        <div class="mt-7 text-base space-y-4 w-[90%]">
+                            <ul class="list-disc list-outside ml-5 space-y-1 leading-relaxed">
+                                <li class="pb-1">사용 및 제조 후 발생한 폐기물의 재생 소재를 활용하여 책임감 있게 디자인한 제품입니다. 탄소 제로, 폐기물 제로를 달성하기
+                                    위해 나이키는 신중하게 소재를 선택합니다.
+                                    제품 개발 과정에서 발생하는 탄소 발자국의 70%가 소재에서 발생하기 때문입니다. 나이키는 플라스틱과 원사, 직물을 재활용하여 탄소 배출량을 크게
+                                    줄이고 있습니다. 나이키의 목표는 성능과 내구성, 스타일을 그대로 유지하면서도 가능한 한 많은 재생 소재를 사용하는 것입니다.</li>
+                                <li>우리가 스포츠를 즐기며 살아가는 지구의 미래를 보호하기 위한 나이키의 노력과 지속 가능성을 염두에 둔 제품 디자인 등 탄소 제로 및 폐기물 제로를 향한
+                                    나이키의
+                                    <span class="underline underline-offset-2 font-semibold">Move to Zero</span> 여정에 대해
+                                    자세히 알아보세요.
+                                </li>
+                            </ul>
+
+                        </div>
+                    </details>
+
+                    <div class="p-3 border-t border-gray-300 pb-5"></div>
+
+                    <details class="border-gray-300 pb-3">
+                        <summary class="main-info-li w-full flex justify-between items-center">
+                            <span>리뷰 (372)</span>
+                            <span class="ml-auto mr-1 flex items-center pr-2 text-[18px]">★★★★★</span>
+                        </summary>
+
+                        <div class="mt-7 text-base space-y-4">
+                            <div class="mb-4">
+                                <span class="mr-3">★★★★★</span>
+                                <span>별 4.8개</span>
+                            </div>
+                            <div class="underline underline-offset-6 font-semibold pb-5">리뷰 작성하기</div>
+                            <ul class=" list-inside space-y-1 pb-7">
+                                <li class="mt-9 pb-7">
+                                    <p class="font-bold pb-3">A mid running shoe, great walking shoe</p>
+                                    <div class="pb-4 flex gap-2">
+                                        <div>★★★☆☆</div>
+                                        <p class="text-gray-500">VincentB140014750 - 2025년 11월 29일</p>
+                                    </div>
+                                    <div>A very comfortable upper that is plush with padding in the right areas. However
+                                        it is not the most breathable and held a lot of moisture while running. </div>
+                                    <div href="#" class="underline underline-offset-6 font-semibold">더 보기</div>
+                                </li>
+                                <li class="pb-7">
+                                    <p class="font-bold pb-3">5 star pair of running shoes</p>
+                                    <div class="pb-4 flex gap-2">
+                                        <div>★★★★★</div>
+                                        <p class="text-gray-500">BabakK743546078 - 2025년 11월 26일</p>
+                                    </div>
+                                    <div>Lightweight, great cushioning & support for those runs on the road or treadmill
+                                        or stair master! Love the shoe & the creamsicle color!</div>
+                                    <div href="#" class="underline underline-offset-6 font-semibold">더 보기</div>
+                                </li>
+                                <li class="pb-7">
+                                    <div class="pb-4 flex gap-2">
+                                        <div>★★★★★</div>
+                                        <p class="text-gray-500">tamil970608773 - 2025년 11월 25일</p>
+                                    </div>
+                                    <div>Awesome shoes! Super comfortable:)</div>
+                                </li>
+                            </ul>
+                            <div href="#" class="underline underline-offset-6 font-semibold pb-7">리뷰 더 보기</div>
+                        </div>
+                    </details>
+
+                    <div class="p-3 border-t border-gray-300 pb-5"></div>
+
+                    <details class="border-gray-300 pb-3">
+                        <summary class="main-info-li flex justify-between items-center">
+                            추가 정보
+                        </summary>
+
+                        <div class="mt-7 text-sm space-y-4">
+                            <div class="text-base">
+                                <p class="font-semibold pb-2">상품정보제공고시</p>
+                                <ul class="list-disc list-inside space-y-1">
+                                    <li class="pb-2">제조연월: 수입제품으로 각 제품별 입고 시기에 따라 상이하여 정확한 제조연월 제공이 어렵습니다. 제조연월을 확인하시려면
+                                        고객센터에 문의하시기 바라며,
+                                        정확한 제조연월은 배송받으신 제품의 라벨을 참고하시기 바랍니다.</li>
+                                    <li class="pb-2">A/S 책임자와 전화번호: (유)나이키코리아 온라인 스토어 고객센터 / 080-022-0182</li>
+                                    <li class="pb-2">세탁방법 및 취급시 주의사항: 자세한 내용은 <span
+                                            class="underline underline-offset-2 font-semibold">'자세히 보기'</span>를 클릭하여 확인
+                                        부탁드립니다.</li>
+                                    <li class="pb-2">미성년자 권리 보호 안내: 자세한 내용은 <span
+                                            class="underline underline-offset-2 font-semibold">'자세히 보기'</span> 를 클릭하여 확인
+                                        부탁드립니다.</li>
+                                    <li class="pb-2">품질보증기준: 품질보증기간-섬유 및 일반 소재(구입 후 6개월), 가죽소재(구입 후 1년). 유통 중 손상되었거나 품질에
+                                        이상이 있는 제품에 한하여
+                                        소비자 피해 보상 규정에 의거 보상하여 드립니다. 단, 제품에 부착되어 있는 사용방법 및 취급 시 주의사항에 따라 제품을 관리해 주시고,
+                                        소비자 부주의로 인한 품질 이상 및 변형에 대해서는 책임을 지지 않습니다.</li>
+                                    <li class="pb-2">제조자/수입품의 경우 수입자를 함께 표기: Nike. Inc / (유)나이키코리아</li>
+                                    <li class="pb-2">실제 제품에는 재활용 소재 관련 내용이 표기되지 않을 수 있습니다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </details>
+                    <div class="p-3 border-t border-gray-300 pb-5"></div>
+                </div>
+            </div>
+
+            <div class="mt-18 mb-9 ">
+                <h2 class="text-5xl tracking-wider leading-relaxed">최상의 더블 스택 쿠셔닝으로 부드럽고 편안한 발걸음을 선사합니다.</h2>
+            </div>
+
+            <div class="grid grid-cols-4 gap-0 divide-x bg-gray-100 place-items-center rounded-md text-center h-[30vh]">
+
+                <div class="card flex flex-col justify-center items-center w-full border-gray-300">
+                    <img src="img/설계목적.png" class="my-5">
+                    <p class="my-3 text-sm">설계 목적</p>
+                    <p class="text-lg font-bold">로드 러닝</p>
+
+                </div>
+
+                <div class="card flex flex-col justify-center items-center w-full border-gray-300">
+                    <img src="img/쿠셔닝.png" class="my-5">
+                    <p class="my-3 text-sm">쿠셔닝</p>
+                    <p class="text-lg font-bold">최상급</p>
+                </div>
+
+                <div class="card flex flex-col justify-center items-center w-full border-gray-300">
+                    <img src="img/신발무게.png" class="my-5">
+                    <p class="my-3 text-sm">신발 무게</p>
+                    <p class="text-lg font-bold">약 325g(280mm 기준)</p>
+                </div>
+
+                <div class="card flex flex-col justify-center items-center w-full border-gray-300">
+                    <img src="img/오프셋.png" class="my-5">
+                    <p class="my-3 text-sm">오프셋</p>
+                    <p class="text-lg font-bold">10mm</p>
+                </div>
+
+            </div>
+
+            <div>
+                <details class="bg-gray-100 p-8 rounded-md mt-5 text-center">
+                    <summary class="flex justify-between items-center text-2xl">
+                        주요 특징
+                    </summary>
+                    <hr class="mt-8 border-gray-200">
+                    <div class="mt-5 text-base space-y-30 w-[90%]">
+                        <ul class="list-disc list-outside space-y-4 leading-relaxed">
+                            <li class="flex">
+                                <div class="w-[37%] text-start">
+                                    <span>신발 무게</span>
+                                </div>
+                                <div>약 325g(280mm 기준)
+                                </div>
+                                
+                            </li>
+                            <hr class="border-gray-200">
+                            <li class="flex">
+                                <div class="w-[37%] text-start">
+                                    <span>오프셋</span>
+                                </div>
+                                
+                                <div>
+                                    <span>10mm</span>
+                                </div>
+                                <hr>
+                            </li>
+                            <hr class="border-gray-200">
+                            <li class="flex">
+                                <div class="w-[37%] text-start">
+                                    <span>기술 요소</span>
+                                </div>
+                                <div>
+                                    <span>줌X 폼, 리액트X 폼</span>
+                                </div>
+                                <hr>
+                            </li>
+                            <hr class="border-gray-200">
+                        </ul>
+
+                    </div>
+
+
+                </details>
+            </div>
+
+
+            <div class="mt-15 w-[46%]">
+                <p class="mb-5">새로운 특징</p>
+                <ul class="list-disc list-outside ml-6 leading-relaxed">
+                    <li>보메로 18은 보메로 17보다 중창이 6mm 더 높아 쿠셔닝이 향상되었으며, 스택 높이는 앞꿈치에서 36mm이고 뒤꿈치에서 46mm입니다.</li>
+                    <li>새로운 폼 카라가 적용된 보메로 18은 쿠셔닝에 초점을 맞춰 보메로 17보다 18% 더 부드러운 느낌을 선사합니다.</li>
+                    <li>로커가 개선되어 뒤꿈치에서 발끝까지 매끄럽게 전환됩니다.</li>
+                </ul>
+            </div>
+
+            <div class="mt-17">
+                <div class="mb-3 flex justify-between items-center">
+                    <div>
+                        <h2 class="text-[40px] font-semibold">퍼포먼스 관련 특징</h2>
+                    </div>
+                    <div>
+                        <button id="prevButton1" class="overflow-buttons bg-gray-100 text-gray-100 mr-3"
+                            onclick="moveElementTransform()"><</button>
+                                <button id="nextButton1"
+                                    class="overflow-buttons bg-gray-200 w-12 h-12 rounded-full text-2xl hover:bg-gray-300"
+                                    onclick="moveElementTransform()"> ></button>
+                    </div>
+
+                </div>
+                <!-- 이동할요소 id : targetSection1 / 버튼 id : prevButton1 / nextButton1  -->
+                <div class="grid grid-flow-col auto-cols-[35rem] gap-3 overflow-x-auto mb-5 mx-12" id="targetSection1">
+                    <div class="card-performance ">
+                        <img class="rounded-xl"
+                            src="https://static.nike.com/a/images/t_prod/w_1536,c_auto,ar_4:5,f_auto,q_auto/ef4149e4-89af-4a23-b9e0-ccb0da6b5cff/image.jpg"
+                            alt="">
+                        <p class="card-performance-item-name">엔지니어드 메쉬 갑피</p>
+                        <div class="card-performance-item-info">
+                            <span class="card-performance-span leading-relaxed text-gray-500 ">엔지니어드 메쉬로 제작된 갑피가 부드러운
+                                착용감과 통기성을 제공합니다.</span>
+                        </div>
+
+                    </div>
+                    <div class="card-performance">
+                        <img class="rounded-xl"
+                            src="https://static.nike.com/a/images/t_prod/w_1536,c_auto,ar_4:5,f_auto,q_auto/df49b282-4ff7-42fd-9388-d5478e951041/image.jpg"
+                            alt="">
+                        <p class="card-performance-item-name">이중 밀도 중창</p>
+                        <div class="card-performance-item-info">
+                            <span class="card-performance-span leading-relaxed text-gray-400">리액트X 폼 위에 줌X 폼을 쌓은 이중 밀도
+                                중창이 기존 리액트 기술보다 13% 향상된 반응성으로 편안한 착화감을 선사합니다.</span>
+                        </div>
+
+                    </div>
+                    <div class="card-performance">
+                        <img class="rounded-xl"
+                            src="https://static.nike.com/a/images/t_prod_ps/w_1536,c_auto,ar_4:5,f_auto,q_auto/845727d1-ba37-418a-a382-23d421ac82c8/image.jpg"
+                            alt="">
+                        <p class="card-performance-item-name">밑창 가장자리의 포드</p>
+                        <div class="card-performance-item-info w-[90%]">
+                            <span class="card-performance-span leading-relaxed text-gray-400">밑창 가장자리의 포드가 민첩성을 높여주며,
+                                뒤꿈치에서 발끝까지 움직임이 매끄럽게 전환되도록 지원합니다.</span>
+                        </div>
+
+                    </div>
+                    <div class="card-performance">
+                        <img class="rounded-xl"
+                            src="https://static.nike.com/a/images/t_prod_pc/w_1536,c_auto,ar_4:5,f_auto,q_auto/2946648c-e96e-490a-a1e8-284c2a5fa653/image.jpg"
+                            alt="">
+                        <p class="card-performance-item-name">푹신한 패딩</p>
+                        <div class="card-performance-item-info w-[90%]">
+                            <span class="card-performance-span leading-relaxed text-gray-400">푹신한 설포와 안감이 편안하게 꼭 맞는 느낌을
+                                제공합니다.</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-15 mb-3">
+                <img src="https://static.nike.com/a/images/w_1920,c_limit/bbfea8f1-966a-4183-886b-c7810491f57b/image.jpg"
+                    alt="">
+            </div>
+
+            <div class="mb-6 flex justify-center items-center bg-gray-100">
+                <div class="flex-1">
+                    <img src="https://static.nike.com/a/images/w_960,c_limit/278e127e-5a3e-4aff-adaf-b4400306e493/image.jpg"
+                        m-5 alt="">
+                </div>
+                <div class="flex justify-center flex-1">
+                    <div class="max-w-18/20">
+                        <div>
+                            <h3 class="text-left font-medium mb-6 text-5xl leading-relaxed pr-25">"전 보메로 18을 좋아해요. 푹신한
+                                쿠셔닝 덕분에 트레이닝 러닝 내내 지치지 않고 달릴 수 있거든요."</h3>
+                        </div>
+                        <div>
+                            <p>그랜트 피셔</p>
+                            <span class="text-gray-700">동메달 2관왕</span>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="my-17">
+                <div class="my-3">
+
+                    <p class="my-3">로드 러닝 제품 더 보기</p>
+                    <h2 class=" text-[40px] font-bold">나에게 맞는 쿠셔닝 찾기</h2>
+
+                </div>
+
+                <div>
+                    <div class="flex mb-2">
+                        <button
+                            class="flex justify-center items-center my-3 mr-3 bg-gray-200 px-5 py-1 rounded-3xl w-auto hover:bg-gray-300 cursor-pointer">
+                            <img src="img/뛰어난_반응성.png" alt="">
+                            <p>뛰어난 반응성</p>
+                        </button>
+                        <button
+                            class="flex justify-center items-center my-3 mr-3 bg-gray-200 px-5 py-1 rounded-3xl w-auto hover:bg-gray-300 cursor-pointer">
+                            <img src="img/최상의_쿠셔닝.png" alt="">
+                            <p>최상의 쿠셔닝</p>
+                        </button>
+                        <button
+                            class="flex justify-center items-center my-3 mr-3 px-5 py-1 rounded-3xl w-auto border cursor-pointer">
+                            <img src="img/탁월한_지지력.png" alt="">
+                            <p>탁월한 지지력</p>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2 mx-12">
+                        <div class="card-performacne">
+                            <img class="rounded-lg"
+                                src="https://static.nike.com/a/images/w_1536,c_limit/df3680e9-3b7b-47aa-b84d-31d264e674a9/image.jpg"
+                                alt="">
+                            <p class="text-2xl py-3 pr-5 w-[90%] ">걸음마다 균형 잡힌 움직임을 이끌고 발을 단단히 잡아주는 가장 안정적인 신발</p>
+                            <span class="font-bold underline underline-offset-6 decoration-gray-400">자세히 보기</span>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-lg"
+                                src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/70195dd3-d464-4a2b-9d61-fabe0cfdd1df/NIKE+STRUCTURE+26.png"
+                                alt="">
+                            <p class="py-3 pr-5 w-[90%] leading-relaxed">나이키 스트럭처 26</p>
+                            <span>169,000원</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 다양한 스타일링 만들기 -->
+            <div class="my-25">
+                <div>
+
+                    <p class="text-2xl">다양한 스타일링 만나보기</p>
+                    <h2 class="my-2">사진을 업로드하고 나만의 나이키 스타일을 공유해 보세요.</h2>
+
+                </div>
+
+                <div>
+                    <div class="flex justify-between mb-5 items-center">
+                        <div>
+                            <button type="button"
+                                class="text-md text-gray-700 text-center bg-neutral-primary-soft border border-gray-300 hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-full px-5 py-1.5 focus:outline-none">
+                                사진 업로드
+                            </button>
+                        </div>
+
+                        <div>
+                            <button class="bg-gray-100 w-11 h-11 rounded-full text-2xl text-gray-200"><</button>
+                                    <button
+                                        class="bg-gray-200 w-11 h-11 rounded-full text-2xl hover:bg-gray-300">></button>
+                        </div>
+
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-3 mb-20">
+                        <div class="card-performacne" style="cursor: url(/project/img/style_icon.png), auto;">
+                            <div class="relative">
+                                <img class="rounded-xl w-full h-[48vh]"
+                                    src="https://static.pxlecdn.com/photos/718803558/original/446554243e09909eb2c7.jpeg"
+                                    alt="">
+                                <button
+                                    class="absolute bottom-3 left-4 w-9 h-9 bg-black rounded-full bg-[url(img/돋보기아이콘.png)] bg-center bg-no-repeat"></button>
+                            </div>
+                            <p class="mt-[0.7rem]">@jerry_sun or Jerry Sun</p>
+                        </div>
+
+                        <div class="card-performacne " style="cursor: url(/project/img/style_icon.png), auto;">
+                            <div class="relative">
+                                <img class="rounded-xl w-full h-[48vh]"
+                                    src="https://static.pxlecdn.com/photos/732086901/original/08c4670b42a38147dd6b.jpeg"
+                                    alt="">
+                                <button
+                                    class="absolute bottom-3 left-4 w-9 h-9 bg-black rounded-full bg-[url(img/돋보기아이콘.png)] bg-center bg-no-repeat"></button>
+                            </div>
+
+                            <p class="mt-[0.7rem]">Mateusz Lipinski</p>
+                        </div>
+
+                        <div class="card-performacne " style="cursor: url(/project/img/style_icon.png), auto;">
+                            <div class="relative">
+                                <img class="rounded-xl w-full h-[48vh]"
+                                    src="https://static.pxlecdn.com/photos/718815007/original/2cb0be69271199a453a7.jpg"
+                                    alt="">
+                                <button
+                                    class="absolute bottom-3 left-4 w-9 h-9 bg-black rounded-full bg-[url(img/돋보기아이콘.png)] bg-center bg-no-repeat"></button>
+                            </div>
+
+                            <p class="mt-[0.7rem]">@Andres.gomez.98</p>
+                        </div>
+
+                        <div class="card-performacne" style="cursor: url(/project/img/style_icon.png), auto;">
+                            <div class="relative">
+                                <img class="rounded-xl w-full h-[48vh]"
+                                    src="https://static.pxlecdn.com/photos/718803559/original/8347354c5e2d6fb74a25.jpeg"
+                                    alt="">
+                                <button
+                                    class="absolute bottom-3 left-4 w-9 h-9 bg-black rounded-full bg-[url(img/돋보기아이콘.png)] bg-center bg-no-repeat"></button>
+                            </div>
+
+                            <p class="mt-[0.7rem]">Matthieu P</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <!-- 다양한 스타일링 끝 -->
+
+                <!-- 이동할요소 id : targetSection2 / 버튼 id : prevButton2 / nextButton2  -->
+                <div>
+                    <div class="flex justify-between items-center mt-15 mb-3">
+                        <div>
+                            <h3 class="text-3xl">추천 제품</h3>
+                        </div>
+                        <div>
+                            <div>
+                                <button id="prevButton2" class="overflow-buttons bg-gray-100 text-gray-200"><</button>
+                                        <button id="nextButton2"
+                                            class="overflow-buttons bg-gray-200 hover:bg-gray-300">></button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="targetSection2" class="grid grid-flow-col auto-cols-[35rem] gap-3 overflow-x-auto mx-13">
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/bc6a9b75-a508-4196-adc4-2f7ed46b039c/%EB%B3%B4%EB%A9%94%EB%A1%9C-18-%EB%82%A8%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94%EC%97%91%EC%8A%A4%ED%8A%B8%EB%9D%BC-%EC%99%80%EC%9D%B4%EB%93%9C-ZdxkDdIz.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로 18</p>
+                            <span>남성 로드 러닝화(엑스트라 와이드)</span>
+                            <p class="favorite-items-price">179,000 원</p>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/92428991-be08-45f1-9da8-3cf082c0a00e/%EB%B3%B4%EB%A9%94%EB%A1%9C-18-%EC%97%AC%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-WZPhL6pg.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로 18</p>
+                            <span>여성 로드 러닝화</span>
+                            <p class="favorite-items-price">152,100 원</p>
+                            <p class="soldout-price">179,000 원</p>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/515e1bbb-7993-445c-88b3-f67a1bd2b1ab/%EB%B3%B4%EB%A9%94%EB%A1%9C-18-%EB%82%A8%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-B50lEW5o.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로 18</p>
+                            <span>남성 로드 러닝화</span>
+                            <p class="favorite-items-price">179,000 원</p>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/14a27a5c-33ef-4f9e-bff8-5f7111ddb8fd/%EB%B3%B4%EB%A9%94%EB%A1%9C-18-%EB%82%A8%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-B50lEW5o.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로 18</p>
+                            <span>남성 로드 러닝화</span>
+                            <p class="favorite-items-price">161,100 원</p>
+                            <p class="soldout-price">179,000 원</p>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/a90b5657-9324-4be7-a119-a4b56e293a9f/%EB%B3%B4%EB%A9%94%EB%A1%9C-%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%97%AC%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-1tmeAQ6T.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로 플러스</p>
+                            <span>여성 로드 러닝화</span>
+                            <p class="favorite-items-price">209,000 원</p>
+                        </div>
+                        <!-- 6번 나이키 보메로 18-->
+                        <div class="card-performacne ">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/47bd2587-ff6d-49bc-8ea5-46b595230b54/%EB%B3%B4%EB%A9%94%EB%A1%9C-18-%EB%82%A8%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-B50lEW5o.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로18</p>
+                            <span>남성 로드 러닝화</span>
+                            <p class="favorite-items-price">179,000 원</p>
+                        </div>
+
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/ba6705d6-7d47-4993-bf31-4d0756973a67/%EB%A0%88%EB%B3%BC%EB%A3%A8%EC%85%98-8-%EC%97%AC%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-nMbunxy4.png"
+                                alt="">
+                            <p class="favorite-items">나이키 레볼루션 8</p>
+                            <span>여성 로드 러닝화</span>
+                            <p class="favorite-items-price">80,100 원</p>
+                            <p class="soldout-price">89,000 원</p>
+                        </div>
+
+                        <!-- 8번 나이키 에어포스 1'07 -->
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/4f37fca8-6bce-43e7-ad07-f57ae3c13142/%EC%97%90%EC%96%B4-%ED%8F%AC%EC%8A%A4-1-07-%EB%82%A8%EC%84%B1-%EC%8B%A0%EB%B0%9C-qdjlTENZ.png"
+                                alt="">
+                            <p class="favorite-items">나이키 에어포스 1'07</p>
+                            <span>남성 신발</span>
+                            <p class="favorite-items-price">139,000 원</p>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/568028fb-0598-4ea7-a111-36084926584c/%EC%8A%A4%ED%8A%B8%EB%9F%AD%EC%B2%98-26-%EB%82%A8%EC%84%B1-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-bQU4zOHG.png"
+                                alt="">
+                            <p class="favorite-items">나이키 스트럭처 26</p>
+                            <span>남성 로드러닝화</span>
+                            <p class="favorite-items-price">161,100 원</p>
+                            <p class="soldout-price">179,000 원</p>
+                        </div>
+                        <div class="card-performacne">
+                            <img class="rounded-xl favorite-items-img"
+                                src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/42f2c300-552a-4cb2-a88b-466e12708e49/%EB%B3%B4%EB%A9%94%EB%A1%9C-18-gore-tex-%EB%82%A8%EC%84%B1-%EC%83%9D%ED%99%9C-%EB%B0%A9%EC%88%98-%EB%A1%9C%EB%93%9C-%EB%9F%AC%EB%8B%9D%ED%99%94-%EB%B0%98%EC%82%AC-%EB%94%94%EC%9E%90%EC%9D%B8-%ED%8F%AC%EC%9D%B8%ED%8A%B8-FHGOGGpq.png"
+                                alt="">
+                            <p class="favorite-items">나이키 보메로18 GORE-TEX</p>
+                            <span>남성 생활 방수 로드 러닝화, 반사 디자인 포인트</span>
+                            <p class="favorite-items-price">209,000 원</p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="p-12">
+        <div class="p-8 border-t border-gray-200 "></div> <!-- 밑줄 -->
+        <div class="flex justify-start text-gray-500 gap-3  pb-12">
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">안내</li>
+                    <li class="footer-first-ul">멤버가입</li>
+                    <li class="footer-first-ul">매장찾기</li>
+                    <li class="footer-first-ul">제품 가이드</li>
+                    <li class="footer-first-ul">러닝화 가이드</li>
+                </ul>
+            </div>
+
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">멤버 혜택</li>
+                    <li class="footer-first-ul">웰컴 쿠폰</li>
+                    <li class="footer-first-ul">생일 쿠폰</li>
+                    <li class="footer-first-ul">학생 할인 쿠폰</li>
+                </ul>
+            </div>
+
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">고객센터</li>
+                    <li class="footer-first-ul">주문배송조회</li>
+                    <li class="footer-first-ul">반품 정책</li>
+                    <li class="footer-first-ul">결제 방법</li>
+                    <li class="footer-first-ul">공지사항</li>
+                    <li class="footer-first-ul">문의하기</li>
+                </ul>
+            </div>
+
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">회사소개</li>
+                    <li class="footer-first-ul">About Nike</li>
+                    <li class="footer-first-ul">소식</li>
+                    <li class="footer-first-ul">채용</li>
+                    <li class="footer-first-ul">투자자</li>
+                    <li class="footer-first-ul">지속가능성</li>
+                    <li class="footer-first-ul">코칭</li>
+                    <li class="footer-first-ul">신고하기</li>
+                </ul>
+            </div>
+            <div class="flex-1">
+                <div class="flex justify-end items-start gap-1">
+                    <img class="w-4 h-4" src="/img/국가변경.png" alt="">
+                    <p class="text-sm font-semibold">대한민국</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <ul class="flex justify-start text-gray-500 gap-5">
+                <li class="text-sm font-semibold">© 2025 Nike, Inc. All Rights Reserved</li>
+                <li class="text-sm font-semibold cursor-pointer hover:text-black">이용약관</li>
+                <li class="text-sm font-semibold text-gray-600 cursor-pointer hover:text-black">
+                    <strong>개인정보처리방침</strong>
+                </li>
+                <li class="text-sm font-semibold cursor-pointer hover:text-black">위치정보이용약관</li>
+                <li class="text-sm font-semibold cursor-pointer hover:text-black">영상정보처리기기 운영 방침</li>
+            </ul>
+        </div>
+
+        <div class="p-3 border-t border-gray-300 pt-5"></div> <!-- 밑줄 -->
+
+        <div class="flex justify-center text-sm text-gray-600 mt-3">
+            <div class=" mr-5">
+                <p>
+                    (유)나이키코리아 대표 Chase Louis Taylor, 체이스 루이스 테일러 | 서울 강남구 테헤란로 152 강남파이낸스센터 30층 | 통신판매업신고번호
+                    2011-서울강남-03461 |
+                    사업자등록번호 220-88-09068 <span class="underline hover:text-black cursor-pointer">사업자 정보 확인</span><br>
+                    고객센터 전화 문의 <span class="underline hover:text-black cursor-pointer">080-022-0182</span> FAX
+                    02-6744-5880 |
+                    이메일 <span class="underline hover:text-black cursor-pointer">service@nike.co.kr</span> | 호스팅서비스사업자
+                    (유)나이키코리아
+                </p>
+            </div>
+            <div>
+                <p>
+                    현금 등으로 결제 시 안전 거래를 위해 나이키 쇼핑몰에서 가입하신 한국결제네트웍스 유한회사의 구매안전 서비스
+                    <span class="underline hover:text-black cursor-pointer">(결제대금예치)</span>를 이용하실 수 있습니다.
+                    콘텐츠산업진흥법에 의한 콘텐츠 보호 안내 <span class="underline hover:text-black cursor-pointer">자세히 보기</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function changeImage(imagePath) {
+            document.getElementById('shop-main-img').src = imagePath;
+        }
+
+        let prevScrollY = 0; // 이전 스크롤 위치를 저장할 변수
+
+        // 약 530줄 퍼포먼스 관련특징 overflow 이동이벤트
+        // 이동할요소 id : targetSection1 / 버튼 id : prevButton1 / nextButton1 버튼 onclick="moveElementTransform()"
+
+        const scrollContainer1 = document.getElementById('targetSection1');
+
+        // 오른쪽으로 스크롤하는 버튼의 클릭 이벤트 핸들러
+        document.getElementById('nextButton1').onclick = function () {
+            // 현재 scrollLeft 값에 100을 더합니다.
+            scrollContainer1.scrollLeft += 572;
+        };
+
+        // 왼쪽으로 스크롤하는 버튼의 클릭 이벤트 핸들러
+        document.getElementById('prevButton1').onclick = function () {
+            // 현재 scrollLeft 값에서 100을 뺍니다.
+            scrollContainer1.scrollLeft -= 572;
+        };
+
+        // 약 700줄 추천제품 overflow 이동이벤트
+        // 이동할요소 id : targetSection2 / 버튼 id : prevButton2 / nextButton2 버튼 onclick="moveElementTransform() <-버튼 태그에 onclick안줘도 됨."
+        const scrollContainer2 = document.getElementById('targetSection2');
+
+        document.getElementById('nextButton2').onclick = function () {
+            scrollContainer2.scrollLeft += 572;
+        };
+
+        document.getElementById('prevButton2').onclick = function () {
+            scrollContainer2.scrollLeft -= 572;
+        };
+
+        // let currentTransformX = 0;
+
+        // function moveElementTransform() {
+        // const box = document.getElementById("targetSection");
+        // currentTransformX -= 300;
+        // // transform: translateX(값)을 사용하여 x축 위치를 변경합니다.
+        // box.style.transform = `translateX(${currentTransformX}px)`;
+        // }
+    </script>
+</body>
+
+</html>
