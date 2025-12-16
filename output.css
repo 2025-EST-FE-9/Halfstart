@@ -384,6 +384,9 @@
   .mx-12 {
     margin-inline: calc(var(--spacing) * 12);
   }
+  .mx-13 {
+    margin-inline: calc(var(--spacing) * 13);
+  }
   .mx-15 {
     margin-inline: calc(var(--spacing) * 15);
   }
@@ -459,8 +462,14 @@
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
   }
+  .mt-9 {
+    margin-top: calc(var(--spacing) * 9);
+  }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
+  }
+  .mt-13 {
+    margin-top: calc(var(--spacing) * 13);
   }
   .mt-15 {
     margin-top: calc(var(--spacing) * 15);
@@ -485,6 +494,9 @@
   }
   .mt-\[0\.7rem\] {
     margin-top: 0.7rem;
+  }
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
   }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
@@ -563,6 +575,9 @@
   }
   .ml-100 {
     margin-left: calc(var(--spacing) * 100);
+  }
+  .ml-\[24\%\] {
+    margin-left: 24%;
   }
   .ml-auto {
     margin-left: auto;
@@ -792,6 +807,9 @@
   .max-w-18\/20 {
     max-width: calc(18/20 * 100%);
   }
+  .max-w-\[64rem\] {
+    max-width: 64rem;
+  }
   .max-w-full {
     max-width: 100%;
   }
@@ -928,6 +946,9 @@
   }
   .gap-1 {
     gap: calc(var(--spacing) * 1);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -1333,6 +1354,9 @@
   }
   .text-\[16px\] {
     font-size: 16px;
+  }
+  .text-\[18px\] {
+    font-size: 18px;
   }
   .text-\[27px\] {
     font-size: 27px;
