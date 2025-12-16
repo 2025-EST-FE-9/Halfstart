@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="output.css" rel="stylesheet">
+    <style>
+        body {
+            font-family:
+                "Nike TG",
+                "Noto Sans KR",
+                "Apple SD Gothic Neo",
+                "Malgun Gothic",
+                Arial,
+                sans-serif;
+        }
+
+        header {
+            font-weight: bold;
+            /* 또는 800 */
+            letter-spacing: -0.5px;
+        }
+
+        .mini-rogo img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .rogo img {
+            width: 70px;
+            height: 35px;
+            cursor: pointer;
+        }
+
+        .user-menu,
+        #input,
+        .align-middle {
+            background: #f5f5f5;
+        }
+
+        /* 검색창 영역 */
+        .search-bar {
+            position: relative;
+            width: 170px;
+            /* 원하는 크기로 조절 */
+        }
+
+        .search-icon {
+            width: 35px;
+            height: 35px;
+            padding: 5px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+            background-color: #f5f5f5;
+        }
+
+        #input {
+            width: 100%;
+            color: gray;
+            padding: 15px;
+            padding-left: 40px;
+            /* 아이콘 위치에 맞게 조절 */
+            border-radius: 50px;
+            background-color: #f5f5f5;
+            outline: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            font-size: medium;
+        }
+
+        #input::placeholder {
+            color: #7a7a7a;
+            opacity: 1;
+        }
+
+        #input:hover {
+            background-color: #d6d6d6;
+        }
+
+        /* header 메뉴바 영역 */
+        /* 장바구니, 즐겨찾기 아이콘 */
+        .cart {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .cart:hover {
+            background-color: #f5f5f5;
+            border-radius: 50%;
+        }
+
+        .menu {
+            position: relative;
+            /* 기준이 되는 박스*/
+            padding: 0px 45px;
+        }
+
+        .sub_title {
+            padding: 30px 10px;
+            display: inline-block;
+            /* position: relative; */
+        }
+
+        .sub_title>a {
+            position: relative;
+            display: inline-block;
+            padding: 10px 0;
+        }
+
+        .sub_title>a::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: black;
+            transform-origin: bottom;
+            transition: transform 0.25s ease-out;
+        }
+
+        .sub_title>a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom;
+        }
+
+        .dropdown_title {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100vw;
+            /* display: none;  메뉴바 숨김 */
+            z-index: 100;
+            background: white;
+            padding: 0 10px;
+            /* header px-13과 맞춤*/
+
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+
+            /* transform: translateY(-10px); 위에서 내려오는 느낌 */
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* 메뉴바 내용 박스 */
+        .dropdown_inner {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 100px;
+            padding: 10px 50px;
+            justify-content: center;
+
+            opacity: 0;
+            transform: translateY(-12px);
+            transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        /* hover 됐을 때 메뉴만 위→아래로 등장 */
+        .sub_title:hover .dropdown_inner {
+            transition-delay: 0.1s;
+            /* 배경이 먼저 깔리고 살짝 뒤에 내용 등장 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .sub_title:hover .dropdown_title,
+        .dropdown_title:hover {
+            /* display: block; */
+            max-height: 500px;
+            /* 메뉴보다 넉넉하게 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 메뉴바 타이틀 이름 */
+        .dropdown_sub_title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding-bottom: 10px;
+        }
+
+        /* 메뉴바 리스트 내용 */
+        .dropdown_sub_item {
+            font-weight: bold;
+            font-size: 0.75rem;
+            color: #7a7a7a;
+            padding-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .dropdown_sub_item:hover {
+            color: black;
+        }
+
+        .dropdown_sub_title:hover {
+            color: #7a7a7a;
+        }
+
+        .vertical-line {
+            border-right: 1px solid;
+            height: 14px;
+
+        }
+
+        /* 상단 헤더 메뉴 리스트*/
+        .mini-item:hover {
+            color: #7a7a7a;
+        }
+
+
+        .mini-customer {
+            position: absolute;
+            top: 200%;
+            left: -50%;
+            background-color: white;
+            width: 250px;
+            /* display: none;  메뉴바 숨김 */
+            z-index: 100;
+            background: white;
+            /* padding: 5px; */
+            border-radius: 10px;
+
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+
+            transform: translateY(-10px);
+            /* 위에서 내려오는 느낌 */
+            transition: all 0.5s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        #customer>a:hover+.mini-customer,
+        .mini-customer:hover {
+            /* display: block; */
+            max-height: 300px;
+            /* 메뉴보다 넉넉하게 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* footer */
+        .footer-first-ul-title {
+            margin-bottom: 2rem;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: black;
+        }
+
+        .footer-first-ul {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <!-- 헤더 상단 user menu [mini 로고, 메뉴바 양 사이드 밀어내기] -->
+        <nav class="user-menu flex h-9 justify-between items-center px-13">
+            <div class="mini-rogo flex gap-7">
+                <img src="img/jordan.png" alt="조던로고">
+                <img src="img/converse.png" alt="컨버스로고">
+            </div>
+
+            <div class="flex ">
+                <ul class="mini-menu relative flex gap-3 text-xs justify-center items-center">
+                    <li class="mini-item"><a href="search.html">매장 찾기</a></li>
+                    <li class="vertical-line"></li>
+                    <li class="mini-item " id="customer">
+                        <a href="#">고객센터</a>
+                        <div class="mini-customer">
+                            <ul class="p-5">
+                                <li class="text-base text-black pb-3">고객센터</li>
+                                <li class="pb-2">주문</li>
+                                <li class="pb-2">로그인 안내</li>
+                                <li class="pb-2">결제 방법</li>
+                                <li class="pb-2">배송</li>
+                                <li class="pb-2">반품</li>
+                                <li class="pb-2">사이즈 가이드</li>
+                                <li class="pb-2">문의하기</li>
+                                <li class="pb-2">개인정보처리방침</li>
+                                <li class="pb-2">이용약관</li>
+                                <li class="pb-2">이벤트</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="vertical-line"></li>
+                    <li class="mini-item"><a href="join.html">가입하기</a></li>
+                    <li class="vertical-line"></li>
+                    <li class="mini-item"><a href="login.html">로그인</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- 헤더 하단 로고, 메뉴, 검색창, 아이콘 (일단 비트윈으로 밀어놓음)-->
+        <nav class="menu bg-white flex justify-between items-center h-15">
+            <div class="rogo flex-1">
+                <a href="index.html"><img src="img/rogo.png" alt="로고"></a>
+            </div>
+
+            <div class="flex text-md gnb mx-auto"> <!--가운데 고정-->
+                <ul class="flex gap-4 justify-center">
+                    <li class="sub_title">
+                        <a href="">New</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title"><a href="">New</a></li>
+                                    <li class="dropdown_sub_item"><a href="">New to Sale✨</a></li>
+                                    <li class="dropdown_sub_item"><a href="">신제품 전체</a></li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">나이키 X 기묘한 이야기</li>
+                                    <li class="dropdown_sub_item">하코네 에키덴 컬렉션</li>
+                                    <li class="dropdown_sub_item">나이키 푸퍼 스타일링</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔</li>
+                                    <li class="dropdown_sub_item">따뜻한 겨울 플리스⛄</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Shop Icons</li>
+                                    <li class="dropdown_sub_item">에어 포스 1</li>
+                                    <li class="dropdown_sub_item">에어맥스</li>
+                                    <li class="dropdown_sub_item">아스트로그래버</li>
+                                    <li class="dropdown_sub_item">샥스</li>
+                                    <li class="dropdown_sub_item">줌 보메로</li>
+                                    <li class="dropdown_sub_item">코르테즈</li>
+                                    <li class="dropdown_sub_item">덩크</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Shop by Sport</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">트레이닝 & 짐</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">요가</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">가이드</li>
+                                    <li class="dropdown_sub_item">러닝화 가이드</li>
+                                    <li class="dropdown_sub_item">키즈 러닝화 가이드</li>
+                                    <li class="dropdown_sub_item">축구화 가이드</li>
+                                    <li class="dropdown_sub_item">조던 농구화 가이드</li>
+                                    <li class="dropdown_sub_item">여성 브라 가이드</li>
+                                    <li class="dropdown_sub_item ">키즈 브라 가이드</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">SNKRS</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Men</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">할리우드 골키퍼 컬렉션</li>
+                                    <li class="dropdown_sub_item">호나우지뉴 티엠포 레전드</li>
+                                    <li class="dropdown_sub_item">윈터 슈즈 컬렉션🥾</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔️</li>
+                                    <li class="dropdown_sub_item">겨울 시즌 용품🧣</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">신발</li>
+                                    <li class="dropdown_sub_item">라이프스타일</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">트레이닝 & 짐</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                    <li class="dropdown_sub_item">10만원 이하 신발</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">의류</li>
+                                    <li class="dropdown_sub_item">아우터웨어</li>
+                                    <li class="dropdown_sub_item">재킷 & 베스트</li>
+                                    <li class="dropdown_sub_item">후디 & 크루</li>
+                                    <li class="dropdown_sub_item">팀 & 티셔츠</li>
+                                    <li class="dropdown_sub_item">팬츠 & 타이츠</li>
+                                    <li class="dropdown_sub_item">남성 셋업</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                    <li class="dropdown_sub_item">24.7</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">용품</li>
+                                    <li class="dropdown_sub_item">모자 & 헤드밴드</li>
+                                    <li class="dropdown_sub_item">가방</li>
+                                    <li class="dropdown_sub_item">양말</li>
+                                    <li class="dropdown_sub_item">장갑</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Women</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">위넡 슈즈 컬렉션🥾</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔️</li>
+                                    <li class="dropdown_sub_item">올데이 플리스 셋업</li>
+                                    <li class="dropdown_sub_item">겨울 시즌 용품🧣</li>
+                                    <li class="dropdown_sub_item">멈추지 않는 러닝</li>
+                                    <li class="dropdown_sub_item">윈터 액티브 팬츠</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">신발</li>
+                                    <li class="dropdown_sub_item">라이프스타일</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">트레이닝 & 짐</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                    <li class="dropdown_sub_item">테니스</li>
+                                    <li class="dropdown_sub_item">10만원 이하 신발</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">의류</li>
+                                    <li class="dropdown_sub_item">아우터웨어</li>
+                                    <li class="dropdown_sub_item">재킷 & 베스트</li>
+                                    <li class="dropdown_sub_item">후디 & 크루</li>
+                                    <li class="dropdown_sub_item">탑 & 티셔츠</li>
+                                    <li class="dropdown_sub_item">팬츠</li>
+                                    <li class="dropdown_sub_item">스커트 & 드레스</li>
+                                    <li class="dropdown_sub_item">여성 셋업</li>
+                                    <li class="dropdown_sub_item">스포츠 브라</li>
+                                    <li class="dropdown_sub_item">타이츠 & 레깅스</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">용품</li>
+                                    <li class="dropdown_sub_item">모자 & 헤드밴드</li>
+                                    <li class="dropdown_sub_item">가방</li>
+                                    <li class="dropdown_sub_item">양말</li>
+                                    <li class="dropdown_sub_item">장갑</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Kids</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">키즈 푸퍼 컬렉션❄️</li>
+                                    <li class="dropdown_sub_item">올 겨울 ACG와 함께🏔️</li>
+                                    <li class="dropdown_sub_item">올데이 플리스 셋업</li>
+                                    <li class="dropdown_sub_item">키즈 코지 무드🥾</li>
+                                    <li class="dropdown_sub_item">Nike X LEGO® 컬렉션</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">신발</li>
+                                    <li class="dropdown_sub_item">베이비 (160mm 이하)</li>
+                                    <li class="dropdown_sub_item">리틀키즈 (165-220mm)</li>
+                                    <li class="dropdown_sub_item">주니어 (200-250mm)</li>
+                                    <li class="dropdown_sub_item">부츠</li>
+                                    <li class="dropdown_sub_item">덩크 & 에어 포스 1</li>
+                                    <li class="dropdown_sub_item">키즈 이지온 신발</li>
+                                    <li class="dropdown_sub_item">라이프스타일</li>
+                                    <li class="dropdown_sub_item">러닝</li>
+                                    <li class="dropdown_sub_item">축구</li>
+                                    <li class="dropdown_sub_item">조던</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">의류</li>
+                                    <li class="dropdown_sub_item">베이비 (0-3세)</li>
+                                    <li class="dropdown_sub_item">리틀키즈 (3-7세)</li>
+                                    <li class="dropdown_sub_item">주니어 (7-15세)</li>
+                                    <li class="dropdown_sub_item">아우터웨어</li>
+                                    <li class="dropdown_sub_item">재킷 & 베스트</li>
+                                    <li class="dropdown_sub_item">후디 & 크루</li>
+                                    <li class="dropdown_sub_item">탑 & 티셔츠</li>
+                                    <li class="dropdown_sub_item">스커트 & 드레스</li>
+                                    <li class="dropdown_sub_item">상하의 세트</li>
+                                    <li class="dropdown_sub_item">팬트 & 레깅스</li>
+                                    <li class="dropdown_sub_item">쇼츠</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">용품</li>
+                                    <li class="dropdown_sub_item">모자</li>
+                                    <li class="dropdown_sub_item">가방</li>
+                                    <li class="dropdown_sub_item">양말</li>
+                                    <li class="dropdown_sub_item">장갑</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Jordan</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">New</li>
+                                    <li class="dropdown_sub_item">신제품 전체</li>
+                                    <li class="dropdown_sub_item">베스트셀러</li>
+                                    <li class="dropdown_sub_item">GIVE SPORT - 연말 선물 준비🎁</li>
+                                    <li class="dropdown_sub_item"></li>
+                                    <li class="dropdown_sub_title">Collections</li>
+                                    <li class="dropdown_sub_item">아우터웨어 할인</li>
+                                    <li class="dropdown_sub_item">조던 겨울 컬렉션❄️</li>
+                                    <li class="dropdown_sub_item">조던 아우터웨어</li>
+                                    <li class="dropdown_sub_item">조던 플리스</li>
+                                    <li class="dropdown_sub_item">조던 스트릿 컬렉션</li>
+                                    <li class="dropdown_sub_item">조던 셋업</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Men</li>
+                                    <li class="dropdown_sub_item">전체 보기</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Women</li>
+                                    <li class="dropdown_sub_item">전체 보기</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                    <li class="dropdown_sub_item">농구</li>
+                                    <li class="dropdown_sub_item">골프</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Kids</li>
+                                    <li class="dropdown_sub_item">전체 보기</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                    <li class="dropdown_sub_item">에어 조던 1</li>
+                                    <li class="dropdown_sub_item ">베이비 (0-3세)</li>
+                                    <li class="dropdown_sub_item">리틀키즈 (3-7세)</li>
+                                    <li class="dropdown_sub_item">주니어 (7-15세)</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+
+                    <li class="sub_title">
+                        <a href="">Sale</a>
+                        <div class="dropdown_title">
+                            <div class="dropdown_inner">
+                                <ul>
+                                    <li class="dropdown_sub_title">Sale</li>
+                                    <li class="dropdown_sub_item">All Sales</li>
+                                    <li class="dropdown_sub_item">Sale 아우터웨어</li>
+                                    <li class="dropdown_sub_item">Sale 신발</li>
+                                    <li class="dropdown_sub_item">Sale 의류</li>
+                                    <li class="dropdown_sub_item">Sale 용품</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Men</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Women</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                </ul>
+
+                                <ul>
+                                    <li class="dropdown_sub_title">Kids</li>
+                                    <li class="dropdown_sub_item">신발</li>
+                                    <li class="dropdown_sub_item">의류</li>
+                                    <li class="dropdown_sub_item">용품</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="util flex-1 flex justify-end items-center gap-4">
+                <div class="search-bar">
+                    <img class="search-icon" src="img/search.png" alt="검색">
+                    <input type="text" placeholder="검색" id="input" class="h-9 rounded-4xl" />
+                </div>
+                <div class="flex ">
+                    <img class="cart" src="img/hope.png" alt="즐겨찾기">
+                    <img class="cart" src="img/장바구니.png" alt="장바구니">
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- 검색으로 돌아가기 링크 -->
+    <main class="m-10">
+        <h3 class="mx-2 py-8 text-base font-medium underline underline-offset-4 cursor-pointer hover:text-gray-600">
+            <a href="search.html" class="flex items-center gap-2 font-semibold">
+                <img src="img/화살표.png" class="w-4 h-4" alt="back arrow">
+                검색으로 돌아가기
+            </a>
+        </h3>
+        <!-- 메인 사진 -->
+        <div class="w-full">
+            <img class="rounded-xl h-[60vw]" src="img/main image.PNG" alt="">
+        </div>
+        <div class="flex justify-start mt-10 mx-80">
+
+            <!-- 세정아울렛 영업 시간 및 주소 -->
+            <div class="space-y-4">
+                <div>
+                    <h1 class="text-3xl font-semibold">나이키 세정 광주</h1>
+
+                    <p class="mt-5 mb-5">
+                        <span class="text-green-700 font-medium">영업 중</span>
+                        <span class="text-gray-600 ml-2">• 영업 종료 시간: 오후 9:00</span>
+                    </p>
+                </div>
+                <div class="flex ">
+
+                    <div class="flex-1">
+
+                        <div class="space-y-1 text-gray-800 mb-3 font-bold">
+                            <p>상무대로 773 세정아울렛</p>
+                            <p>서구, 광주광역시, 61961, KR</p>
+                            <p>062-372-2094</p>
+                        </div>
+
+                        <div>
+                            <button
+                                class="cursor-pointer px-5 py-3 rounded-3xl font-medium bg-black text-white inline-block hover:bg-gray-500">오시는
+                                길</button>
+                        </div>
+                    </div>
+
+
+                    <div class="ml-100">
+                        <h2 class="font-semibold">매장 영업 시간</h2>
+                        <p>일 - 토: 오전 10:30 - 오후 9:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between mx-7 py-5">
+            <ul>
+                <li class="font-bold">근처 매장</li>
+            </ul>
+            <!-- 매장 디렉토리 링크 -->
+            <ul>
+                <li class="font-medium underline hover:text-gray-500 cursor-pointer">
+                <a href="https://www.nike.com/kr/retail/directory">매장 디렉토리</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 광주몰 정보 및 링크 -->
+        <div class="grid grid-cols-3 place-items-center gap-5 mx-5 cursor-pointer">
+            <div>
+                <a href="https://www.nike.com/kr/retail/s/%eb%82%98%ec%9d%b4%ed%82%a4-%ea%b4%91%ec%a3%bc%eb%aa%b0">
+                    <img class="rounded-xl" src="https://static.nike.com/a/images/f_auto/2e8d9338-b43d-4ef5-96e1-7fdcfd838f8e/image.jpg" alt="">
+                    <p class="font-bold mt-3 mb-2">나이키 광주몰</p>
+                    <div class="text-gray-600 mb-5">
+                        <p class="mb-1">상무대로 627 (B동108호, 109호)</p>
+                        <p class="mb-1">서구,광주광역시,61944,KR</p>
+                        <span class="text-green-700">영업 중</span> • 영업 종료 시간: 오후 9:00
+                    </div>
+                </a>
+            </div>
+            <!-- 롯데 월드럽 링크 및 정보 -->
+            <div class="w-full">
+                <a href="https://www.nike.com/kr/retail/s/nike-lotte-gwangju-worldcup">
+                    <img class="rounded-xl h-[35vh]" src="https://cdn.filepicker.io/api/file/fvnjv5WPReybS5kbv4tg" alt="">
+                    <p class="font-bold mt-3 mb-2">나이키 롯데 광주 월드컵</p>
+                    <div class="text-gray-600 mb-5">
+                        <p class="mb-1">금화로 240 롯데아울렛 2F</p>
+                        <p class="mb-1">서구,광주광역시,62048,KR</p>
+                        <span class="text-green-700">영업 중</span> • 영업 종료 시간: 오후 9:00
+                    </div>
+                </a>
+            </div>
+            <!-- 신세계 링크 및 정보 -->
+            <div class="w-full">
+                <a href="https://www.nike.com/kr/retail/s/nike-shinsaegae-gwangju-fashion-street">
+                    <img class="rounded-xl h-[35vh]" src="https://cdn.filepicker.io/api/file/fvnjv5WPReybS5kbv4tg" alt="">
+                    <p class="font-bold mt-3 mb-2">나이키 신세계 광주</p>
+                    <div class="text-gray-600 mb-5">
+                        <p class="mb-1">죽봉대로62,패션스트리트(화정동) 지하 1층</p>
+                        <p class="mb-1">서구,광주광역시,61937,KR</p>
+                        <span class="text-green-700">영업 중</span> • 영업 종료 시간: 오후 8:30
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="p-12">
+        <div class="p-8 border-t border-gray-200 "></div> <!-- 밑줄 -->
+        <div class="flex justify-start text-gray-500 gap-3  pb-12">
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">안내</li>
+                    <li class="footer-first-ul">멤버가입</li>
+                    <li class="footer-first-ul">매장찾기</li>
+                    <li class="footer-first-ul">제품 가이드</li>
+                    <li class="footer-first-ul">러닝화 가이드</li>
+                </ul>
+            </div>
+
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">멤버 혜택</li>
+                    <li class="footer-first-ul">웰컴 쿠폰</li>
+                    <li class="footer-first-ul">생일 쿠폰</li>
+                    <li class="footer-first-ul">학생 할인 쿠폰</li>
+                </ul>
+            </div>
+
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">고객센터</li>
+                    <li class="footer-first-ul">주문배송조회</li>
+                    <li class="footer-first-ul">반품 정책</li>
+                    <li class="footer-first-ul">결제 방법</li>
+                    <li class="footer-first-ul">공지사항</li>
+                    <li class="footer-first-ul">문의하기</li>
+                </ul>
+            </div>
+
+            <div class="flex-1">
+                <ul>
+                    <li class="footer-first-ul-title">회사소개</li>
+                    <li class="footer-first-ul">About Nike</li>
+                    <li class="footer-first-ul">소식</li>
+                    <li class="footer-first-ul">채용</li>
+                    <li class="footer-first-ul">투자자</li>
+                    <li class="footer-first-ul">지속가능성</li>
+                    <li class="footer-first-ul">코칭</li>
+                    <li class="footer-first-ul">신고하기</li>
+                </ul>
+            </div>
+            <div class="flex-1">
+                <div class="flex justify-end items-start gap-1">
+                    <img class="w-4 h-4" src="img/국가변경.png" alt="">
+                    <p class="text-sm font-semibold">대한민국</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-20">
+            <ul class="flex justify-start text-gray-500 gap-5">
+                <li class="text-sm font-semibold">© 2025 Nike, Inc. All Rights Reserved</li>
+                <li class="text-sm font-semibold cursor-pointer hover:text-black">이용약관</li>
+                <li class="text-sm font-semibold text-gray-600 cursor-pointer hover:text-black">
+                    <strong>개인정보처리방침</strong>
+                </li>
+                <li class="text-sm font-semibold cursor-pointer hover:text-black">위치정보이용약관</li>
+                <li class="text-sm font-semibold cursor-pointer hover:text-black">영상정보처리기기 운영 방침</li>
+            </ul>
+        </div>
+
+        <div class="p-3 border-t border-gray-300 pt-5"></div> <!-- 밑줄 -->
+
+        <div class="flex justify-center text-sm text-gray-600 mt-3">
+            <div class=" mr-5">
+                <p>
+                    (유)나이키코리아 대표 Chase Louis Taylor, 체이스 루이스 테일러 | 서울 강남구 테헤란로 152 강남파이낸스센터 30층 | 통신판매업신고번호
+                    2011-서울강남-03461 |
+                    사업자등록번호 220-88-09068 <span class="underline hover:text-black cursor-pointer">사업자 정보 확인</span><br>
+                    고객센터 전화 문의 <span class="underline hover:text-black cursor-pointer">080-022-0182</span> FAX
+                    02-6744-5880 |
+                    이메일 <span class="underline hover:text-black cursor-pointer">service@nike.co.kr</span> | 호스팅서비스사업자
+                    (유)나이키코리아
+                </p>
+            </div>
+            <div>
+                <p>
+                    현금 등으로 결제 시 안전 거래를 위해 나이키 쇼핑몰에서 가입하신 한국결제네트웍스 유한회사의 구매안전 서비스
+                    <span class="underline hover:text-black cursor-pointer">(결제대금예치)</span>를 이용하실 수 있습니다.
+                    콘텐츠산업진흥법에 의한 콘텐츠 보호 안내 <span class="underline hover:text-black cursor-pointer">자세히 보기</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

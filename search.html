@@ -3,17 +3,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="output.css" rel="stylesheet">
-  <title>프로젝트 -나이키는 멋짱이</title>
-
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+ <link href="output.css" rel="stylesheet">
   <style>
     body {
       font-family:
       "Nike TG",
       "Noto Sans KR",
       "Apple SD Gothic Neo",
-      "Malgun Gothic",
+      "Malgun Gothic",  
       Arial,
       sans-serif;
     }
@@ -239,99 +238,8 @@
       transform: translateY(0);
     }
 
-
-    /* main body */
-    /* 가로 스크롤 안 이미지 영역 */
-    .gift {
-      width: 100%;
-      height: calc(90vh+120px);
-      overflow-y: hidden;   /* 세로 스크롤 방지 */
-      padding-bottom: 40px; /* 스크롤바와 콘텐츠 사이 간격 */
-      box-sizing: border-box;
-    }
-    .gift-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;   /* 그리드 셀 전체를 채우게 */
-    }
-    .img-box {
-      height: 90vh;
-      max-height: none;
-      overflow: hidden;
-    }
-
-    /* .jordan-btn{
-      font-size: 1.3rem;
-      margin-top: 1.5rem;
-      background-color: white;
-      font-weight: 700;
-      color: black;
-      padding: 15px 36px ;
-      border-radius: 40px;
-    }
     
-    .jordan-btn:hover {
-      background-color: #c2c2c2;
-    } */
-
-    /*구매하기 흰색 버튼*/
-    .gift-card-btn {
-       font-size: 1rem;
-       margin-top: 1.4rem;
-       background-color: white;
-       font-weight: 700;
-       color: rgb(37, 37, 37);
-       padding: 8px 16px ;
-       border-radius: 30px;
-       /*filter: drop-shadow(0 0 10px rgba(0,0,0,.9));*/
-    }
-    .gift-card-btn:hover {
-      background-color: #c2c2c2;
-    }
-    /* 슬라이더 버튼*/
-    .carousel-btn {
-      background-color: rgba(227, 227, 227, 0.9);
-      width:3.4rem;
-      height: 3.5rem;
-      font-size:2rem;
-      border-radius: 50%;
-      margin-bottom: 0.5rem;
-      font-weight: 200;
-    }
-
-    .carousel-btn:hover{
-      background-color: rgba(205, 205, 205, 0.9);
-    }
-
-    .bt-list{
-      color: #696969;
-      padding-bottom: 0.9rem;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      /* padding: 4px 0; */
-    }
-    .bt-list:hover{
-      color: black;
-    }
-
-    .bt-list.is-collapsed{
-      max-height: 0;
-      opacity: 0;
-      transform: translateY(0);
-      overflow: hidden;
-      transition: max-height .35s ease, opacity .25s ease, transform .35s ease;
-    }
-
-
-    .parent:hover .bt-list.is-collapsed{
-      max-height: 100px; 
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-
-    /* footer */
+   /* footer */
     .footer-first-ul-title{
         margin-bottom: 2rem;
         font-weight: bold;
@@ -344,7 +252,7 @@
         font-weight: bold;
         cursor: pointer;
     }
-    
+
   </style>
 </head>
 
@@ -734,442 +642,180 @@
           <input type="text" placeholder="검색" id="input" class="h-9 rounded-4xl" />
         </div>
         <div class="flex ">
-          <a href="profile.html"><img class="cart" src="img/hope.png" alt="즐겨찾기"></a>
+          <img class="cart" src="img/hope.png" alt="즐겨찾기">
           <img class="cart" src="img/장바구니.png" alt="장바구니">
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- main -->
   <main>
-    <!-- 1. 대학생 할인 프로그램 안내창 -->
-    <div class="align-middle text-center p-2 text-md">
-      <p class=" font-semibold mb-1">대학생 할인 프로그램 안내</p>
-      <p class="underline text-xs font-semibold"><a href="#">자세히 보기</a></p>
-    </div>
-
-    <!-- 2.사진 세장 영역 -->
-    <div class="grid grid-cols-1 md:grid-cols-3 min-h-[40vw] md:min-h-[20vw] max-h-[600px]">
-      <div class="hidden md:block">
-        <!-- cover- 부모 컨테이너를 채우기 위해 이미지의 일부가 잘릴 수 있지만, 이미지의 종횡비는 유지됩니다.  w,h 부모에게 100% -->
-        <img class="w-full h-full object-cover" src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/58fe66d4-a2f3-443c-864e-245fda285905/M+J+FLT+CHI+JKT+RLT.png" alt="사진">
-      </div>
-      <div>
-        <img class="w-full h-full object-cover" src="https://static.nike.com/a/images/w_960,c_limit/677b798f-c3d6-4616-b412-88929591efae/image.jpg" alt="사진">
-      </div>
-      <div class="hidden md:block">
-        <img class="w-full h-full object-cover" src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/499f67be-f1a3-4be9-90f2-51ed9f01966b/AS+W+NSW+TF+DWN+SWSH+PFR.png" alt="사진">
-      </div>
-    </div>
-
-    <!-- 3. 선물하기 박스 영역 -->
-    <div class="text-center p-10 m-8">
-      <div class="mb-6">
-        <h3 class="font-extrabold text-5xl mb-5">언제나 완벽한 편안함</h3>
-        <P class="font-bold">다음 경기 준비를 위한 최고의 스포츠웨어를 선물해 보세요.</P>
-      </div>
-      <div class="gap-2">
-        <button type="button" class="font-bold px-4 py-2 rounded-4xl text-white bg-black hover:bg-gray-500">자세히 보기</button>
-        <button type="button" class="font-bold px-4 py-2 rounded-4xl text-white bg-black hover:bg-gray-500">선물하기</button>
-      </div>
-    </div>
-
-    <!-- 4. 선물 구매하기 -->
-    <div class=" pb-5">
-      <div class=" px-7 m-2 font-bold flex justify-between items-center">
-        <div class="text-2xl px-12">선물 구매하기</div>
-        <div class="px-5">
-          <button class="carousel-btn mr-2"><</button>
-          <button class="carousel-btn">></button>
-        </div>
-      </div>
-
-      <div class="gift grid grid-flow-col auto-cols-[39rem] gap-3 overflow-x-auto">
-        <div class="gift-card ps-12">
-          <div class="img-box">
-            <a href="detail_page.html">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/f_auto,cs_srgb/w_1536,c_limit/35ab44b5-f8c5-4ea8-bbef-21751d31f4d8/%EB%82%98%EC%9D%B4%ED%82%A4-%EB%9F%AC%EB%8B%9D-%EC%8B%A0%EB%B0%9C-%EC%9D%98%EB%A5%98-%EB%B0%8F-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC.jpg"
-              alt="사진">
-              </a>
-          </div>
-          <p class="pt-5 text-xl font-semibold">러닝</p>
+    <div class="flex h-[80vh]">
+      <!-- 매장 검색 영역 -->
+      <div class="left-panel w-160 h-screen">
+        <h2 class="font-bold text-2xl mx-7 my-3 py-5">나이키 매장 찾기</h2>
+        <!-- 위치 검색 박스 -->
+        <div class="mb-5 relative mx-10 mt-3 pt-3">
+          <img src="img/search.png" alt="search"
+            class="w-5 h-5 mt-2 absolute left-3 top-1/2 -translate-y-1/2 z-10 cursor-pointer" />
+          <input type="text" placeholder="위치 검색"
+            class="w-full pl-10 pr-4 py-3 pt-5 font-medium text-gray-600 border border-gray-500 rounded-lg bg-white relative focus:outline-none hover:border-black" />
         </div>
 
-        <div class="gift-card">
-          <div class="img-box">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/f_auto,cs_srgb/w_1536,c_limit/95d263bf-0a7f-49ac-a4f8-78794cb9b0df/%EB%82%98%EC%9D%B4%ED%82%A4-%EB%9F%AC%EB%8B%9D-%EC%8B%A0%EB%B0%9C-%EC%9D%98%EB%A5%98-%EB%B0%8F-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC.jpg"
-              alt="사진">
+        <!-- 필터 버튼 및 근처매장 -->
+        <div class="mx-5 px-5 mb-4">
+          <label for="filterToggle" class="flex justify-between items-center">
+            <p class="text-gray-500 text-sm">근처 매장: 15 개</p>
+            <div
+              class="cursor-pointer flex px-6 py-2 border border-gray-300 rounded-3xl hover:border-black font-medium">
+              필터
+              <img src="img/filter.png" alt="filter" class="w-5 h-5 mx-1" />
             </div>
-          <p class="pt-5 text-xl font-semibold">트레이닝</p>
-        </div>
-        <div class="gift-card">
-          <div class="img-box">
-            <img
-              class="w-full h-full object-cover"
-              src="https://cdn.consumerwide.com/news/photo/202505/63959_77698_5610.jpg"
-              alt="사진">
-            </div>
-          <p class="pt-5 text-xl font-semibold">축구</p>
-        </div>
-        <div class="gift-card">
-          <div class="img-box">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/f_auto,cs_srgb/w_1536,c_limit/9c2345ed-16d0-4cd9-96aa-8517ecd1da03/%EB%82%98%EC%9D%B4%ED%82%A4-%EB%86%8D%EA%B5%AC.jpg"
-              alt="사진">
-          </div>
-          <p class="pt-5 text-xl font-semibold">농구</p>
-        </div>
-        <div class="gift-card">
-          <div class="img-box">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/eb7c1d4d-db20-4820-94d2-5e71c07af25a/M+NK+JERSEY+MOP1.png"
-              alt="사진">
-          </div>
-          <p class="pt-5 text-xl font-semibold">스포츠웨어</p>
-        </div>
-        <div class="gift-card">
-          <div class="img-box">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/t_web_pdp_936_v2/f_auto/5d18d0a0-df86-4d73-83aa-4f84e4f8215b/NKN+CLUB+CHENILLE+CREW+FLEECE.png"
-              alt="사진">
-          </div>
-          <p class="pt-5 text-xl font-semibold">키즈</p>
-        </div>
-      </div>
-    </div>
-    <div class="p-8"></div>
+          </label>
 
-    <!-- 5. 운동화 사진 한장 영역 -->
-    <div class="w-screen relative"> <!-- 화면 전체 폭 -->
-       <!-- w-full : div 화면 폭 전체로
-            h-auto : 비율 유지
-            block : 이미지 밑에 쓸데없는 여백 제거
-       -->
-      <img
-        class="w-full h-auto block" 
-        src="https://static.nike.com/a/images/w_1920,c_limit,f_auto,q_auto/857f4574-aca6-4f95-8e7c-da2b02ef5afd/image.png"
-        alt="운동화 한장">
-        <div class="absolute bottom-12 left-12 text-white">
-          <!-- filter: drop-shadow(x-offset y-offset blur color) -->
-          <p class="text-5xl font-black pb-2">에어 조던 11 레트로 '감마'</p>
-          <p class="text-4xl font-semibold ">COMING SOON</p>
-          <button class="gift-card-btn">알림 받기</button>
-        </div>
-    </div>
+          <!-- 숨김메뉴 -->
+          <input type="checkbox" id="filterToggle" class="peer hidden" />
 
-    <!-- 6. 르브론 구매하기 영역-->
-    <div class="text-center p-8 m-3">
-      <p class="pb-3">르브론 XXIII</p>
-      <h3 class="font-extrabold text-5xl pb-4">'FROM THIS POINT <br> FORWARD' 컬러웨이</h3>
-      <p class="pb-5">르브론이 '선택 받은 자'라는 뜻의 'The Chosen One'으로 불린 순간,
-        <br>'왕'의 시대는 시작됐습니다. 새로운 컬러웨이를 만나보세요.
-      </p>
-      <div class="gap-2">
-        <button type="button" class="font-bold px-4 py-2 rounded-4xl text-white bg-black hover:bg-gray-500">구매하기</button>
-        <button type="button" class="font-bold px-4 py-2 rounded-4xl text-white bg-black hover:bg-gray-500">자세히 보기</button>
-      </div>
-    </div>
-   
-    <!-- 7. Trending Now 글씨, 사진 영역 -->
-    <div class="pb-5">
-      <!-- Trending Now 글씨, 화살표 버튼 -->
-      <div class="flex justify-between items-center px-12 m-2 font-bold">
-        <div class="text-3xl px-12">Trending Now</div>
-        <div class="px-5">
-          <button class="carousel-btn mr-2"><</button>
-          <button class="carousel-btn">></button>
-        </div>
-      </div>
-
-      <!-- 사진 세장 영역 스크롤 (사진안에 이름 구매하기 버튼) -->
-      <div class="gift grid grid-flow-col auto-cols-[39rem] gap-3 overflow-x-auto">
-        <div class="gift-card relative ps-12">
-          <div class="img-box relative">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/5a71b8a7-6771-416b-911f-f027cff55041/M+NK+TCH+TF+BOREAS+OH+PANT.png"
-              alt="사진">
-              <div class="absolute bottom-12 left-10 text-white">
-                <!-- filter: drop-shadow(x-offset y-offset blur color) -->
-                <p class="text-3xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,.8)]">나이키 셋업</p>
-                <button class="gift-card-btn">구매하기</button>
-              </div>
+          <!-- 필터 메뉴 -->
+          <div class="mt-3 hidden peer-checked:block">
+            <h2 class="font-bold text-2xl mb-5">필터</h2>
+            <ul class="space-y-3">
+              <li>
+                <input type="radio" id="f1" name="filter" class="peer hidden" checked />
+                <label for="f1" class="peer-checked:underline ">
+                  모든 매장
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="f2" name="filter" class="peer hidden" />
+                <label for="f2" class="peer-checked:underline">
+                  나이키 매장
+                </label>
+              </li>
+              <li>
+                <input type="radio" id="f3" name="filter" class="peer hidden" />
+                <label for="f3" class="peer-checked:underline">
+                  Nike Value Stores
+                </label>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div class="gift-card relative">
-          <div class="img-box relative">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto,u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c8742441-5c77-4f17-acf9-83fe2aa6bbdf/M+J+FLT+CHI+JKT+RLT.png"
-              alt="사진">
-              <div class="absolute bottom-12 left-10 text-white">
-                <p class="text-3xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,.8)]">조던 플라이트 시카고</p>
-                <button class="gift-card-btn">구매하기</button>
-              </div>
+        <!-- 광주, 전남권 매장 리스트 -->
+        <div class="grid grid-flow-row auto-cols-[40rem] gap-2 cursor-pointer overflow-x-hidden overflow-y-scroll h-125 border-t border-t-gray-300 border-b border-b-gray-300">
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <!-- (나이키 세정 광주 클릭 -> 매장 사이트로 이동) -->
+            <div class="font-medium pb-2 px-7 ">
+              <a href="gwangjumall.html">나이키 세정 광주</a></div>
+            <div class="text-gray-500 px-7">상무대로 773 세정아울렛<br>서구, 광주광역시, 61961, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-red-700">영업 종료</span>· 영업 시작 시간 오전 11:00</div>
+          </div>
+
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 광주몰</div>
+            <div class="text-gray-500 px-7">상무대로 627 (B동 108호,109호)<br>서구, 광주광역시, 61955, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-red-700">영업 종료</span>· 영업 시작 시간 오전 11:00</div>
+          </div>
+          
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 신세계 광주</div>
+            <div class="text-gray-500 px-7">죽봉대로61, 패션스트리트(화정동s) 지하 1층<br>서구, 광주광역시, 61937, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-green-700">영업중</span>· 영업 종료 시간: 오후 9:00</div>
+          </div>
+
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 롯데 광주 월드컵</div>
+            <div class="text-gray-500 px-7">금화로 240 롯데아울렛 2F<br>서구, 광주광역시, 62048, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-red-700">영업 종료</span> · 영업 시작 시간: 오전 11:00</div>
+          </div>
+
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 롯데 광주 수완</div>
+            <div class="text-gray-500 px-7">장신로 98 롯데아울렛 광주수완점 A블럭 1층<br>광산구, 광주광역시, 62225, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-green-700">영업중</span> · 영업 종료 시간: 오후 9:00</div>
+          </div>
+
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 광주 용봉</div>
+            <div class="text-gray-500 px-7">용봉택지로 96<br>북구, 광주광역시, 61110, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-green-700">영업중</span> · 영업 종료 시간: 오후 9:00</div>
+          </div>
+          
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 충장로</div>
+            <div class="text-gray-500 px-7">충장로 77<br>동구, 광주광역시, 61482, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-red-700">영업 종료</span> · 영업 시작 시간: 오전 11:00</div>
+          </div>
+          
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 첨단</div>
+            <div class="text-gray-500 px-7">임방울대로 785<br>광산구, 광주광역시, 62274, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-red-700">영업 종료</span> · 영업 시작 시간: 오전 10:30</div>
+          </div>
+          
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 정읍</div>
+            <div class="text-gray-500 px-7">중앙로 125<br>정읍시, 전라북도, 56163, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-orange-700">곧 영업 시작</span> · 영업 시작 시간: 오전 11:00</div>
+          </div>
+         
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 롯데 목포</div>
+            <div class="text-gray-500 px-7">무안군 삼향읍 남악로162번길 80 롯데아울렛 남악점 3층<br>목포시, 전라남도, 58579, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-orange-700">곧 영업 시작</span> · 영업 시작 시간: 오전 10:30</div>
+          </div>
+
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 목포 하당</div>
+            <div class="text-gray-500 px-7">비파로 20<br>목포시, 전라남도, 58688, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-orange-700">곧 영업 시작</span> · 영업 시작 시간: 오전 11:00</div>
+          </div>
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 남원</div>
+            <div class="text-gray-500 px-7">남문로 456-2<br>남원시, 전라북도, 55775, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-green-700">영업중</span> · 영업 종료 시간: 오후 9:00</div>
+          </div>
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 순천</div>
+            <div class="text-gray-500 px-7">연향중앙상가길 12<br>순천시, 전라남도, 57967, KR</div>
+            <div class="text-gray-500 px-7"><span class="text-red-700">영업 종료</span> · 영업 시작 시간: 오전 11:00</div>
+          </div>
+          <div class="py-3 border-t border-gray-300 "></div>
+          <div class="mb-3">
+            <div class="font-medium pb-2 px-7">나이키 NC 순천</div>
+            <div class="text-gray-500 px-7">비봉2길 22<br>순천시, 전라남도, 57929, KR</div>
+            <div class="text-gray-500 px-7 mb-5"><span class="text-red-700">영업 종료</span> · 영업 시작 시간: 오전 10:30</div>
           </div>
         </div>
-
-        <div class="gift-card relative">
-          <div class="img-box relative">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/w_960,c_limit/351f687c-a737-4216-a26d-7992e473397c/image.png"
-              alt="사진">
-              <div class="absolute bottom-12 left-10 text-white">
-                <p class="text-3xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,.8)]">나이키 알파플라이 3</p>
-                <button class="gift-card-btn">구매하기</button>
-              </div>
-            </div>
-        </div>
-
-        <div class="gift-card relative">
-          <div class="img-box relative">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/w_1920,c_limit/63496f66-6c48-42f8-ba2a-312788e3721f/image.jpg"
-              alt="사진">
-              <div class="absolute bottom-12 left-10 text-white">
-                <p class="text-3xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,.8)]">나이키 페가수스 플러스</p>
-                <button class="gift-card-btn">구매하기</button>
-              </div>
-            </div>
-        </div>
-
-        <div class="gift-card relative">
-          <div class="img-box relative">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/w_1536,c_limit/2b758d57-9685-43cb-b9cc-4df4a17f7e5e/image.jpg"
-              alt="사진">
-              <div class="absolute bottom-12 left-10 text-white">
-                <p class="text-3xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,.8)]">나이키 페가수스 41</p>
-                <button class="gift-card-btn">구매하기</button>
-              </div>
-          </div>
-        </div>
-
-        <div class="gift-card relative">
-          <div class="img-box relative">
-            <img
-              class="w-full h-full object-cover"
-              src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/2e289f5e-b217-4084-9263-8c51c371a469/G+NSW+FLC+LS+TOP+COZY.png"
-              alt="사진">
-              <div class="absolute bottom-12 left-10 text-white">
-                <p class="text-3xl font-semibold drop-shadow-[0_1px_1px_rgba(0,0,0,.8)]">Kids</p>
-                <button class="gift-card-btn">구매하기</button>
-              </div>
-          </div>
+        <!-- 모든 매장 찾기 -->
+        <div class="font-medium underline underline-offset-4 pt-3 mx-7"><a href="#"
+            class="hover:text-gray-400 font-bold ">모든 매장 보기</a>
         </div>
       </div>
-    </div>
 
-    <!-- 8. Always Iconic 영역 -->
-    <div  class="my-20 mx-10">
-      <div  class="m-7">
-        <p class="px-8 text-3xl font-semibold">Always Iconix</p>
-      </div>
-
-      <!-- 사진 다섯장 + 버튼 영역 -> 버튼 누르면 옆으로 넘어감 -->
-      <div class="relative">
-      <!-- 좌 버튼 -->
-      <button onclick="slideLeft()"
-        class="absolute left-10 top-1/2 -translate-y-1/2 z-10 bg-white px-4 py-3 rounded-full shadow">
-        ◀
-      </button>
-
-      <!-- 우 버튼 -->
-      <button onclick="slideRight()"
-        class="absolute right-10 top-1/2 -translate-y-1/2 z-10 bg-white px-4 py-3 rounded-full shadow">
-        ▶
-      </button>
-
-  <!-- 캐러셀 -->
-      <div id="carousel" class="grid grid-flow-col auto-cols-[23rem] gap-4 overflow-hidden scroll-smooth snap-x snap-mandatory">
-        <!-- scroll-smooth 부드럽게 애니메이션 이동, snap-x x축 스크롤에만 스냅 규칙 적용, snap-mandatory 스크롤 끝나면 반드시 가장 가까운 스냅 지점으로 붙는다 -->
-        <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/d755a4e0-7fc1-49a4-98d2-9dd04be02995/KOBE+AIR+FORCE+1+LOW.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">코비 에어 포스 1 로우</p>
-         </div>
-        </div>
-
-         <div class="relative  snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/b3a3e958-f025-4822-b085-fb1d072dfa09/AIR+MAX+TL+2.5.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">나이키 에어맥스 TL 2.5</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/17de659e-f697-4b86-bb71-d39f9e160b85/NIKE+ZOOM+VOMERO+ROAM.png"
-          alt="사진">
-          <div class="absolute bottom-6  left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">나이키 줌 보메로 롬</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/4a3850b7-5d18-4d75-9718-6c1de56285e2/W+NIKE+ASTROGRABBER+LTHR.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">나이키 아스트로그래버 레더</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/e3ae15dc-ede4-496b-bf36-fa92998eb763/AIR+FORCE+1+%2707.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">나이키 에어 포스 1 '07</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/516bd228-018b-47f8-b25f-1d11e15dfff7/NIKE+ZOOM+VOMERO+ROAM.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">나이키 줌 보메로 롬</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/954de8c3-8422-49c2-81cb-bcbb69018760/AIR+FORCE+1+LUXE.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">나이키 에어 포스 1 럭스</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/3b45260f-1db5-453e-aa3f-5fb1684c97a7/LEBRON+XXIII+EP.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">르브론 XXIII '포인트 포워드'EP</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/21ab4987-7b3c-4253-8aa7-ca257d954144/LEBRON+XX+EP.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">르브론 XX EP</p>
-         </div>
-        </div>
-
-         <div class="relative snap-center">
-          <img 
-          class="w-full h-full object-cover"
-          src="https://static.nike.com/a/images/t_web_pdp_535_v2/f_auto/4db31548-bb18-42bd-9417-242097c7c043/KD18+SE+EP.png"
-          alt="사진">
-          <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full text-center">
-          <p class="text-xl font-semibold">KD18 '슬림 리퍼' EP</p>
-         </div>
-        </div>
-      </div>
-    </div>
-    </div>
-
-
-    <!-- 9. 테이블 메뉴바 영역 list 4개-->
-    <div class="px-20 pt-10">
-      <div class="parent grid grid-cols-[repeat(4,200px)] justify-center gap-12">
-      <div class="w-50">
-        <h4 class="text-2xl font-bold mb-8">Featured</h4>
-        <ul>
-          <li class="bt-list">에어 포스 1</li>
-          <li class="bt-list">에어 조던 1</li>
-          <li class="bt-list">에어 맥스</li>
-          <li class="bt-list">필드 제너럴</li>
-          <li class="bt-list is-collapsed">샥스</li>
-          <li class="bt-list is-collapsed">코르테즈</li>
-          <li class="bt-list is-collapsed">V2K</li>
-          <li class="bt-list is-collapsed">P-6000</li>
-          <li class="bt-list is-collapsed">줌 보메로</li>
-          <li class="bt-list is-collapsed">덩크</li>
-          <li class="bt-list is-collapsed">페가수스</li>
-        </ul>
-      </div>
-
-      <div class="w-50 mr-12">
-        <h4 class="text-2xl font-bold mb-8">신발</h4>
-        <ul>
-          <li class="bt-list">전체 보기</li>
-          <li class="bt-list">러닝</li>
-          <li class="bt-list">축구</li>
-          <li class="bt-list">농구</li>
-          <li class="bt-list is-collapsed">라이프스타일</li>
-          <li class="bt-list is-collapsed">조던</li>
-          <li class="bt-list is-collapsed">골프</li>
-          <li class="bt-list is-collapsed">테니스</li>
-          <li class="bt-list is-collapsed">트레이닝</li>
-          <li class="bt-list is-collapsed">Sale 신발</li>
-        </ul>
-      </div>
-
-      <div class="w-50 mr-12">
-        <h4 class="text-2xl font-bold mb-8">의류</h4>
-        <ul>
-          <li class="bt-list">전체 보기</li>
-          <li class="bt-list">탑 & 티셔츠</li>
-          <li class="bt-list">쇼츠</li>
-          <li class="bt-list">재킷 & 베스트</li>
-          <li class="bt-list is-collapsed">후디 & 크루</li>
-          <li class="bt-list is-collapsed">팬티 & 타이츠</li>
-          <li class="bt-list is-collapsed">스포츠 브라</li>
-          <li class="bt-list is-collapsed">수영복</li>
-          <li class="bt-list is-collapsed">NikeLab</li>
-          <li class="bt-list is-collapsed">Sale 의류</li>
-        </ul>
-      </div>
-
-      <div class="w-50">
-        <h4 class="text-2xl font-bold mb-8">Kids</h4>
-        <ul>
-          <li class="bt-list">신발 전체 보기</li>
-          <li class="bt-list">키즈 러닝 신발</li>
-          <li class="bt-list">키즈 축구 신발</li>
-          <li class="bt-list">키즈 농구 신발</li>
-          <li class="bt-list is-collapsed">키즈 조던 신발</li>
-          <li class="bt-list is-collapsed">키즈 의류</li>
-          <li class="bt-list is-collapsed">키즈 용품</li>          
-        </ul>
-      </div>
+      <!-- 지도 이미지 -->
+      <div class="flex-1 overflow-y-scroll">
+        <img src="img/map.png" alt="지도 이미지" class="w-full object-cover" />
       </div>
     </div>
   </main>
 
-
-  <!-- footer -->
-  <footer class="px-12 pb-12">
+<!-- footer -->
+  <footer class="p-12">
     <div class="p-8 border-t border-gray-200 "></div> <!-- 밑줄 -->
     <div class="flex justify-start text-gray-500 gap-3  pb-12">
       <div class="flex-1">
@@ -1218,8 +864,8 @@
         <div class="flex justify-end items-start gap-1">
               <img 
                 class="w-4 h-4"
-                src="/img/국가변경.png" alt="">
-              <p class="footer-first-ul">대한민국</p>
+                src="img/국가변경.png" alt="">
+              <p class="text-sm font-semibold">대한민국</p>
         </div>
       </div>
     </div>
@@ -1228,7 +874,7 @@
         <ul class="flex justify-start text-gray-500 gap-5">
             <li class="text-sm font-semibold">© 2025 Nike, Inc. All Rights Reserved</li>
             <li class="text-sm font-semibold cursor-pointer hover:text-black">이용약관</li>
-            <li class="text-sm font-semibold text-gray-700 cursor-pointer hover:text-black"><strong>개인정보처리방침</strong></li>
+            <li class="text-sm font-semibold text-gray-600 cursor-pointer hover:text-black"><strong>개인정보처리방침</strong></li>
             <li class="text-sm font-semibold cursor-pointer hover:text-black">위치정보이용약관</li>
             <li class="text-sm font-semibold cursor-pointer hover:text-black">영상정보처리기기 운영 방침</li>
         </ul>
@@ -1251,26 +897,8 @@
                 <span class="underline hover:text-black cursor-pointer">(결제대금예치)</span>를 이용하실 수 있습니다.
                 콘텐츠산업진흥법에 의한 콘텐츠 보호 안내 <span class="underline hover:text-black cursor-pointer">자세히 보기</span>
             </p>
-        </div>
+        </div>s
     </div>
   </footer>
-
-  <!-- 신발 사진 캐러셀 버튼 자바 영역 -->
-  <script>
-  // id="carousel" 요소 찾아서 변수에 저장, 스크롤을 움직여야할 대상 컨테이너 정확히 지정
-  const carousel = document.getElementById('carousel');
-  // 카드 한장의 실제 이동 거리 계산, 버튼 누르면 한장간격만큰 정확히 이동
-  const slideWidth = 23 * 16 + 16; // 22rem + gap(1rem)
-
-  // 현재 스크롤 위치에서 왼쪽으로 한 장 이동
-  // scrollLeft = 가로 스크롤 위치(px) / -= → 현재 값에서 빼기
-  function slideLeft() {
-    carousel.scrollLeft -= slideWidth;
-  }
-
-  function slideRight() {
-    carousel.scrollLeft += slideWidth;
-  }
-</script>
 </body>
 </html>

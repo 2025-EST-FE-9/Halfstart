@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <link href="output.css" rel="stylesheet">
   <title>프로젝트 -나이키는 멋짱이</title>
 
@@ -360,7 +361,7 @@
 
       <div class="flex ">
         <ul class="mini-menu relative flex gap-3 text-xs justify-center items-center">
-          <li class="mini-item"><a href="search.html">매장 찾기</a></li>
+          <li class="mini-item"><a href="#">매장 찾기</a></li>
           <li class="vertical-line"></li>
           <li class="mini-item " id="customer">
             <a href="#">고객센터</a>
@@ -381,9 +382,9 @@
             </div>
           </li>
           <li class="vertical-line"></li>
-          <li class="mini-item"><a href="join.html">가입하기</a></li>
+          <li class="mini-item"><a href="#">가입하기</a></li>
           <li class="vertical-line"></li>
-          <li class="mini-item"><a href="login.html">로그인</a></li>
+          <li class="mini-item"><a href="#">로그인</a></li>
         </ul>
       </div>
     </nav>
@@ -391,7 +392,7 @@
     <!-- 헤더 하단 로고, 메뉴, 검색창, 아이콘 (일단 비트윈으로 밀어놓음)-->
     <nav class="menu bg-white flex justify-between items-center h-15">
       <div class="rogo flex-1">
-        <a href="index.html"><img src="img/rogo.png" alt="로고"></a>
+        <a href="http://127.0.0.1:5501/tailwindcss/index.html"><img src="img/rogo.png" alt="로고"></a>
       </div>
 
       <div class="flex text-md gnb mx-auto"> <!--가운데 고정-->
@@ -730,16 +731,18 @@
           
       <div class="util flex-1 flex justify-end items-center gap-4">
         <div class="search-bar">
-          <img class="search-icon" src="img/search.png" alt="검색">
+          <img class="search-icon" src="/img/search.png" alt="검색">
           <input type="text" placeholder="검색" id="input" class="h-9 rounded-4xl" />
         </div>
         <div class="flex ">
-          <a href="profile.html"><img class="cart" src="img/hope.png" alt="즐겨찾기"></a>
-          <img class="cart" src="img/장바구니.png" alt="장바구니">
+          <img class="cart" src="/img/hope.png" alt="즐겨찾기">
+          <img class="cart" src="/img/장바구니.png" alt="장바구니">
         </div>
       </div>
     </nav>
   </header>
+
+
 
   <!-- main -->
   <main>
@@ -750,16 +753,16 @@
     </div>
 
     <!-- 2.사진 세장 영역 -->
-    <div class="grid grid-cols-1 md:grid-cols-3 min-h-[40vw] md:min-h-[20vw] max-h-[600px]">
-      <div class="hidden md:block">
+    <div class="grid grid-cols-3 h-180 ">
+      <div>
         <!-- cover- 부모 컨테이너를 채우기 위해 이미지의 일부가 잘릴 수 있지만, 이미지의 종횡비는 유지됩니다.  w,h 부모에게 100% -->
-        <img class="w-full h-full object-cover" src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/58fe66d4-a2f3-443c-864e-245fda285905/M+J+FLT+CHI+JKT+RLT.png" alt="사진">
+        <img class="w-full h-full object-cover img-fluid" src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/58fe66d4-a2f3-443c-864e-245fda285905/M+J+FLT+CHI+JKT+RLT.png" alt="사진">
       </div>
       <div>
-        <img class="w-full h-full object-cover" src="https://static.nike.com/a/images/w_960,c_limit/677b798f-c3d6-4616-b412-88929591efae/image.jpg" alt="사진">
+        <img class="w-full h-full object-cover img-fluid" src="https://static.nike.com/a/images/w_960,c_limit/677b798f-c3d6-4616-b412-88929591efae/image.jpg" alt="사진">
       </div>
-      <div class="hidden md:block">
-        <img class="w-full h-full object-cover" src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/499f67be-f1a3-4be9-90f2-51ed9f01966b/AS+W+NSW+TF+DWN+SWSH+PFR.png" alt="사진">
+      <div>
+        <img class="w-full h-full object-cover img-fluid" src="https://static.nike.com/a/images/t_web_pw_592_v2/f_auto/499f67be-f1a3-4be9-90f2-51ed9f01966b/AS+W+NSW+TF+DWN+SWSH+PFR.png" alt="사진">
       </div>
     </div>
 
@@ -788,12 +791,10 @@
       <div class="gift grid grid-flow-col auto-cols-[39rem] gap-3 overflow-x-auto">
         <div class="gift-card ps-12">
           <div class="img-box">
-            <a href="detail_page.html">
             <img
               class="w-full h-full object-cover"
               src="https://static.nike.com/a/images/f_auto,cs_srgb/w_1536,c_limit/35ab44b5-f8c5-4ea8-bbef-21751d31f4d8/%EB%82%98%EC%9D%B4%ED%82%A4-%EB%9F%AC%EB%8B%9D-%EC%8B%A0%EB%B0%9C-%EC%9D%98%EB%A5%98-%EB%B0%8F-%EC%95%A1%EC%84%B8%EC%84%9C%EB%A6%AC.jpg"
               alt="사진">
-              </a>
           </div>
           <p class="pt-5 text-xl font-semibold">러닝</p>
         </div>
