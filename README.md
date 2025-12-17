@@ -3,7 +3,6 @@
 HTML, CSS, Tailwind CSS만을 사용하여  
 Nike 공식 웹사이트의 핵심 UI/UX를 **JavaScript 없이 퍼블리싱 관점에서 재현한 클론 프로젝트**입니다.
 
----
 
 ## 📌 프로젝트 개요
 
@@ -18,7 +17,10 @@ JavaScript 기반의 동적 로직 구현보다는,
 
 에 집중하여 **프론트엔드 기본기와 퍼블리싱 역량 강화**를 목표로 제작했습니다.
 
----
+
+## 🕰 개발 기간
+
+25.12.10 ~ 25.12.16
 
 ## 🎯 주요 목표 및 학습 성과
 
@@ -27,7 +29,6 @@ JavaScript 기반의 동적 로직 구현보다는,
 - Tailwind CSS 유틸리티 클래스 조합을 통한 빠르고 일관된 UI 구현
 - Flexbox와 Grid를 활용한 복잡한 레이아웃 구현 능력 강화
 
----
 
 ## 🛠 기술 스택
 
@@ -38,7 +39,6 @@ JavaScript 기반의 동적 로직 구현보다는,
 - **Tailwind CSS**
   - 유틸리티 퍼스트 접근 방식으로 빠르고 일관된 스타일링
 
----
 
 ## ⚙️ 개발 환경 & 실행 방법
 
@@ -48,10 +48,10 @@ JavaScript 기반의 동적 로직 구현보다는,
 
 ### Tailwind CSS 빌드 명령어
 
-```bash
-npx tailwindcss -i src/style.css -o public/output.css --watch
+    bash
+    npx tailwindcss -i src/style.css -o public/output.css --watch
 
----
+
 
 ## ✨ 구현 내용 (주요 UI)
 
@@ -69,7 +69,6 @@ HTML / CSS / Tailwind CSS만을 사용하여 다음 UI 요소 구현에 집중�
 - **브랜드 스타일 반영**
   - Nike 공식 웹사이트의 색상, 폰트, 전반적인 분위기를 참고하여 재현
 
----
 
 ## 💡 프로젝트를 통해 얻은 인사이트
 
@@ -80,19 +79,19 @@ HTML / CSS / Tailwind CSS만을 사용하여 다음 UI 요소 구현에 집중�
 - **UI/UX 디테일의 가치**
   - 여백, 폰트 크기, 시각적 계층 구조, 반응형 처리 등 세밀한 요소를 분석하고 구현하며 퍼블리싱 완성도 향상
 
----
+
 
 ## 📷 미리보기
 
 > 추후 프로젝트 스크린샷 또는 GIF 추가 예정
 
----
+
 
 ## 🔗 데모 링크
 
 > GitHub Pages / Vercel 배포 후 링크 추가 예정
 
----
+
 
 ## 🔍 참고 사항
 
